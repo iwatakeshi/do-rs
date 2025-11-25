@@ -44,6 +44,20 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 - **native-tls** (default): Use the platform's native TLS implementation
 - **rustls-tls**: Use rustls for TLS
 
+## Documentation
+
+To build and view the Rust documentation locally:
+
+```bash
+# Build the documentation
+cargo doc --no-deps
+
+# Open the documentation in your browser
+cargo doc --no-deps --open
+```
+
+The documentation includes all API endpoints, models, and configuration options with detailed descriptions.
+
 ## API Coverage
 
 This client provides access to all DigitalOcean API endpoints including:
