@@ -31,7 +31,7 @@ jobs:
           node-version: '20'
 
       - name: Install OpenAPI Generator CLI
-        run: npm install @openapitools/openapi-generator-cli
+        run: npm install @openapitools/openapi-generator-cli@2.15.3
 
       - name: Get current version
         id: current_version
@@ -100,7 +100,6 @@ jobs:
         if: steps.changes.outputs.has_changes == 'true'
         id: release_notes
         run: |
-          PREVIOUS_TAG=$(git describe --tags --abbrev=0 HEAD^ 2>/dev/null || echo "")
           RELEASE_DATE=$(date +%Y-%m-%d)
           
           {
