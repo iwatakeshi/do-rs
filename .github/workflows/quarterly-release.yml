@@ -64,6 +64,9 @@ jobs:
       - name: Verify generated code compiles
         run: cargo check
 
+      - name: Run tests
+        run: cargo test
+
       - name: Check for changes
         id: changes
         run: |
