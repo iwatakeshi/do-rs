@@ -58,6 +58,11 @@ jobs:
             -o . \
             --additional-properties=packageName=digitalocean,packageVersion=${{ steps.next_version.outputs.version }}
 
+      - name: Apply custom patches
+        run: |
+          chmod +x apply-patches.sh
+          ./apply-patches.sh
+
       - name: Set up Rust
         uses: dtolnay/rust-toolchain@stable
 

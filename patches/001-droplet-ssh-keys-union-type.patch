@@ -1,0 +1,96 @@
+--- a/src/models/droplet_create_ssh_keys_inner.rs
++++ b/src/models/droplet_create_ssh_keys_inner.rs
+@@ -11,14 +11,88 @@
+ use crate::models;
+ use serde::{Deserialize, Serialize};
+ 
+-#[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
+-pub struct DropletCreateSshKeysInner {
++/// Represents an SSH key that can be specified either as an integer ID or a string fingerprint.
++/// 
++/// The DigitalOcean API accepts both formats in the ssh_keys array when creating Droplets.
++/// This enum provides a type-safe way to represent this union type.
++///
++/// # Examples
++///
++/// Using integer IDs:
++/// ```
++/// use digitalocean::models::DropletCreateSshKeysInner;
++///
++/// let key_id = DropletCreateSshKeysInner::from_id(123456);
++/// // Or use the From trait
++/// let key_id2: DropletCreateSshKeysInner = 789012i64.into();
++/// ```
++///
++/// Using fingerprint strings:
++/// ```
++/// use digitalocean::models::DropletCreateSshKeysInner;
++///
++/// let key_fp = DropletCreateSshKeysInner::from_fingerprint(
++///     "aa:bb:cc:dd:ee:ff:00:11:22:33:44:55:66:77:88:99".to_string()
++/// );
++/// // Or use the From trait
++/// let key_fp2: DropletCreateSshKeysInner = "fingerprint-string".into();
++/// ```
++///
++/// Using in a Droplet creation request:
++/// ```
++/// use digitalocean::models::{DropletCreate, DropletCreateImage, DropletCreateSshKeysInner};
++///
++/// let image = DropletCreateImage::Integer(12345);
++/// let mut droplet = DropletCreate::new("s-1vcpu-1gb".to_string(), image);
++///
++/// // Add SSH keys using both integer IDs and fingerprints
++/// droplet.ssh_keys = Some(vec![
++///     123456i64.into(),  // Using integer ID
++///     "aa:bb:cc:dd:ee:ff:00:11:22:33:44:55:66:77:88:99".into(),  // Using fingerprint
++/// ]);
++/// ```
++#[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
++#[serde(untagged)]
++pub enum DropletCreateSshKeysInner {
++    /// SSH key specified by its integer ID
++    Integer(i64),
++    /// SSH key specified by its fingerprint string
++    String(String),
+ }
+ 
+ impl DropletCreateSshKeysInner {
+-    pub fn new() -> DropletCreateSshKeysInner {
+-        DropletCreateSshKeysInner {
+-        }
++    /// Create a new SSH key reference from an integer ID
++    pub fn from_id(id: i64) -> Self {
++        DropletCreateSshKeysInner::Integer(id)
++    }
++
++    /// Create a new SSH key reference from a fingerprint string
++    pub fn from_fingerprint(fingerprint: String) -> Self {
++        DropletCreateSshKeysInner::String(fingerprint)
++    }
++}
++
++impl Default for DropletCreateSshKeysInner {
++    fn default() -> Self {
++        DropletCreateSshKeysInner::Integer(0)
++    }
++}
++
++impl From<i64> for DropletCreateSshKeysInner {
++    fn from(id: i64) -> Self {
++        DropletCreateSshKeysInner::Integer(id)
++    }
++}
++
++impl From<String> for DropletCreateSshKeysInner {
++    fn from(fingerprint: String) -> Self {
++        DropletCreateSshKeysInner::String(fingerprint)
++    }
++}
++
++impl From<&str> for DropletCreateSshKeysInner {
++    fn from(fingerprint: &str) -> Self {
++        DropletCreateSshKeysInner::String(fingerprint.to_string())
+     }
+ }
+ 
