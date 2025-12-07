@@ -11,14 +11,50 @@
 use crate::models;
 use serde::{Deserialize, Serialize};
 
-#[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
-pub struct DropletCreateSshKeysInner {
+/// Represents an SSH key that can be specified either as an integer ID or a string fingerprint.
+/// The DigitalOcean API accepts both formats in the ssh_keys array.
+#[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum DropletCreateSshKeysInner {
+    /// SSH key specified by its integer ID
+    Integer(i64),
+    /// SSH key specified by its fingerprint string
+    String(String),
 }
 
 impl DropletCreateSshKeysInner {
-    pub fn new() -> DropletCreateSshKeysInner {
-        DropletCreateSshKeysInner {
-        }
+    /// Create a new SSH key reference from an integer ID
+    pub fn from_id(id: i64) -> Self {
+        DropletCreateSshKeysInner::Integer(id)
+    }
+
+    /// Create a new SSH key reference from a fingerprint string
+    pub fn from_fingerprint(fingerprint: String) -> Self {
+        DropletCreateSshKeysInner::String(fingerprint)
+    }
+}
+
+impl Default for DropletCreateSshKeysInner {
+    fn default() -> Self {
+        DropletCreateSshKeysInner::Integer(0)
+    }
+}
+
+impl From<i64> for DropletCreateSshKeysInner {
+    fn from(id: i64) -> Self {
+        DropletCreateSshKeysInner::Integer(id)
+    }
+}
+
+impl From<String> for DropletCreateSshKeysInner {
+    fn from(fingerprint: String) -> Self {
+        DropletCreateSshKeysInner::String(fingerprint)
+    }
+}
+
+impl From<&str> for DropletCreateSshKeysInner {
+    fn from(fingerprint: &str) -> Self {
+        DropletCreateSshKeysInner::String(fingerprint.to_string())
     }
 }
 
