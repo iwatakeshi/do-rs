@@ -17,11 +17,17 @@ if [ -d "$PATCHES_DIR" ]; then
     for patch_file in "$PATCHES_DIR"/*.patch; do
         if [ -f "$patch_file" ]; then
             echo "Applying patch: $(basename "$patch_file")"
-            if patch -p1 -N --dry-run --silent < "$patch_file" 2>/dev/null; then
+            # Check if patch can be applied (ignoring "already applied" warnings)
+            if patch -p1 -N --dry-run --silent < "$patch_file" 2>&1 | grep -q "Reversed (or previously applied) patch detected"; then
+                echo "  ⚠ Patch $(basename "$patch_file") already applied, skipping"
+            elif patch -p1 -N --dry-run --silent < "$patch_file" 2>&1; then
+                # Apply the patch for real
                 patch -p1 -N < "$patch_file"
                 echo "  ✓ Successfully applied $(basename "$patch_file")"
             else
-                echo "  ⚠ Patch $(basename "$patch_file") already applied or conflicts detected"
+                echo "  ✗ Failed to apply $(basename "$patch_file") - conflicts detected"
+                echo "  Please review and resolve conflicts manually"
+                exit 1
             fi
         fi
     done
