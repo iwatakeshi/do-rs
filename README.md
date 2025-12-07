@@ -79,6 +79,8 @@ For complete API documentation, see the [DigitalOcean API Reference](https://doc
 
 This client is auto-generated from the official [DigitalOcean OpenAPI specification](https://github.com/digitalocean/openapi) using [OpenAPI Generator](https://openapi-generator.tech/).
 
+### Regenerating the Client
+
 To regenerate the client:
 
 1. Clone this repository
@@ -91,6 +93,20 @@ To regenerate the client:
      -o . \
      --additional-properties=packageName=digitalocean,packageVersion=0.1.0
    ```
+3. Apply custom patches to fix OpenAPI spec limitations:
+   ```bash
+   ./apply-patches.sh
+   ```
+
+### Custom Patches
+
+Some functionality requires modifications to the generated code that cannot be expressed in the OpenAPI spec. These customizations are preserved using patch files in the `patches/` directory.
+
+The patches are automatically applied:
+- During the quarterly release workflow
+- When you run `./apply-patches.sh` manually after regeneration
+
+For more information about the patch system, see [patches/README.md](patches/README.md).
 
 ## License
 
