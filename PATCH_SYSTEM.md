@@ -56,11 +56,11 @@ Developers regenerating code locally just need to run:
 - **002-droplet-ssh-keys-tests.patch**: Adds comprehensive tests for SSH keys serialization/deserialization
 - **droplet_with_ssh_keys.rs**: Example demonstrating SSH keys usage
 
-### Automatic Fixes (sed-based)
+### File Replacements
 
-The `apply-patches.sh` script also applies automatic fixes using `sed` for issues where context-dependent patches are unreliable:
+The `apply-patches.sh` script also replaces certain generated files with corrected versions:
 
-- **credentials.rs serde_as fix**: Removes incorrectly generated `#[serde_as]` attribute and `use serde_with::serde_as;` import from `src/models/credentials.rs`. The OpenAPI Generator produces these attributes incorrectly, causing compilation errors. This is handled via `sed` rather than a patch file because the generated file structure varies between generator versions.
+- **credentials.rs**: Replaces `src/models/credentials.rs` with a corrected version that doesn't include the broken `#[serde_as]` attributes. The OpenAPI Generator incorrectly generates `serde_as` attributes with `Vec<u8>` fields that cause compilation errors. The corrected version uses `Option<String>` fields instead.
 
 ### Patch Format
 

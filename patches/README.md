@@ -20,11 +20,11 @@ Patches are applied in numerical order:
 - **002-droplet-ssh-keys-tests.patch**: Adds comprehensive tests for the SSH keys union type
 - **droplet_with_ssh_keys.rs**: Example file demonstrating SSH keys usage (copied to `examples/`)
 
-### Automatic Fixes (sed-based)
+### File Replacements
 
-The `apply-patches.sh` script also applies the following automatic fixes using `sed`:
+The `apply-patches.sh` script also replaces certain generated files with corrected versions:
 
-- **credentials.rs serde_as fix**: Removes incorrectly generated `#[serde_as]` attribute and `use serde_with::serde_as;` import from `src/models/credentials.rs`. This fix is applied using `sed` rather than a patch file because the generated file structure varies, making context-dependent patches unreliable.
+- **credentials.rs**: Replaces `src/models/credentials.rs` with a corrected version that doesn't include the broken `#[serde_as]` attributes. The OpenAPI Generator incorrectly generates `serde_as` attributes with `Vec<u8>` fields that cause compilation errors. The corrected version uses `Option<String>` fields instead.
 
 ## How Patches Work
 

@@ -13,21 +13,13 @@ echo "Applying custom patches to generated code..."
 
 # Fix serde_as compilation errors in credentials.rs
 # The OpenAPI Generator incorrectly generates serde_as attributes that cause compilation errors.
-# This sed-based fix is more robust than a patch file since it doesn't depend on exact line numbers.
+# We replace the entire generated file with a corrected version stored in patches/.
 CREDENTIALS_FILE="${SCRIPT_DIR}/src/models/credentials.rs"
-if [ -f "$CREDENTIALS_FILE" ]; then
-    if grep -q "serde_as" "$CREDENTIALS_FILE"; then
-        echo "Fixing serde_as issues in credentials.rs..."
-        # Remove the serde_with import line
-        sed -i '/^use serde_with::serde_as;$/d' "$CREDENTIALS_FILE"
-        # Remove the #[serde_as] attribute line
-        sed -i '/^#\[serde_as\]$/d' "$CREDENTIALS_FILE"
-        # Remove any empty lines that might be left over (consecutive blank lines)
-        sed -i '/^$/N;/^\n$/d' "$CREDENTIALS_FILE"
-        echo "  ✓ Fixed serde_as issues in credentials.rs"
-    else
-        echo "  ⚠ credentials.rs already fixed or doesn't have serde_as issues"
-    fi
+CREDENTIALS_PATCH="${PATCHES_DIR}/credentials.rs"
+if [ -f "$CREDENTIALS_PATCH" ]; then
+    echo "Replacing credentials.rs with corrected version..."
+    cp "$CREDENTIALS_PATCH" "$CREDENTIALS_FILE"
+    echo "  ✓ Replaced credentials.rs with corrected version (fixes serde_as issues)"
 fi
 
 # Apply patch files
