@@ -18,8 +18,9 @@ Patches are applied in numerical order:
 
 - **001-droplet-ssh-keys-union-type.patch**: Converts `DropletCreateSshKeysInner` from an empty struct to an enum supporting both integer IDs and string fingerprints
 - **002-droplet-ssh-keys-tests.patch**: Adds comprehensive tests for the SSH keys union type
-- **003-fix-credentials-serde-as.patch**: Removes incorrectly generated `#[serde_as]` attribute from Credentials model that causes compilation errors
 - **droplet_with_ssh_keys.rs**: Example file demonstrating SSH keys usage (copied to `examples/`)
+
+> **Note**: Patch 003 (fix-credentials-serde-as) was removed as of December 2025 because the OpenAPI Generator was updated to produce correct code without the `serde_as` compilation errors.
 
 ## How Patches Work
 
