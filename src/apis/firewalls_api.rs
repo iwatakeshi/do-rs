@@ -24,6 +24,7 @@ pub enum FirewallsAddRulesError {
     Status404(models::Error),
     Status429(models::Error),
     Status500(models::Error),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 
@@ -36,6 +37,7 @@ pub enum FirewallsAddTagsError {
     Status404(models::Error),
     Status429(models::Error),
     Status500(models::Error),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 
@@ -48,6 +50,7 @@ pub enum FirewallsAssignDropletsError {
     Status404(models::Error),
     Status429(models::Error),
     Status500(models::Error),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 
@@ -59,6 +62,7 @@ pub enum FirewallsCreateError {
     Status401(models::Error),
     Status429(models::Error),
     Status500(models::Error),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 
@@ -70,6 +74,7 @@ pub enum FirewallsDeleteError {
     Status404(models::Error),
     Status429(models::Error),
     Status500(models::Error),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 
@@ -82,6 +87,7 @@ pub enum FirewallsDeleteDropletsError {
     Status404(models::Error),
     Status429(models::Error),
     Status500(models::Error),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 
@@ -94,6 +100,7 @@ pub enum FirewallsDeleteRulesError {
     Status404(models::Error),
     Status429(models::Error),
     Status500(models::Error),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 
@@ -106,6 +113,7 @@ pub enum FirewallsDeleteTagsError {
     Status404(models::Error),
     Status429(models::Error),
     Status500(models::Error),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 
@@ -117,6 +125,7 @@ pub enum FirewallsGetError {
     Status404(models::Error),
     Status429(models::Error),
     Status500(models::Error),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 
@@ -127,6 +136,7 @@ pub enum FirewallsListError {
     Status401(models::Error),
     Status429(models::Error),
     Status500(models::Error),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 
@@ -139,6 +149,7 @@ pub enum FirewallsUpdateError {
     Status404(models::Error),
     Status429(models::Error),
     Status500(models::Error),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 

@@ -24,6 +24,7 @@ pub enum PartnerAttachmentsCreateError {
     Status422(models::Error),
     Status429(models::Error),
     Status500(models::Error),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 
@@ -35,6 +36,7 @@ pub enum PartnerAttachmentsCreateServiceKeyError {
     Status404(models::Error),
     Status429(models::Error),
     Status500(models::Error),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 
@@ -46,6 +48,7 @@ pub enum PartnerAttachmentsDeleteError {
     Status404(models::Error),
     Status429(models::Error),
     Status500(models::Error),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 
@@ -57,6 +60,7 @@ pub enum PartnerAttachmentsGetError {
     Status404(models::Error),
     Status429(models::Error),
     Status500(models::Error),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 
@@ -68,6 +72,7 @@ pub enum PartnerAttachmentsGetBgpAuthKeyError {
     Status404(models::Error),
     Status429(models::Error),
     Status500(models::Error),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 
@@ -79,6 +84,7 @@ pub enum PartnerAttachmentsGetServiceKeyError {
     Status404(models::Error),
     Status429(models::Error),
     Status500(models::Error),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 
@@ -90,6 +96,7 @@ pub enum PartnerAttachmentsListError {
     Status404(models::Error),
     Status429(models::Error),
     Status500(models::Error),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 
@@ -101,6 +108,7 @@ pub enum PartnerAttachmentsListRemoteRoutesError {
     Status404(models::Error),
     Status429(models::Error),
     Status500(models::Error),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 
@@ -112,6 +120,7 @@ pub enum PartnerAttachmentsPatchError {
     Status404(models::Error),
     Status429(models::Error),
     Status500(models::Error),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 

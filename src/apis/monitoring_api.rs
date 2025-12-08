@@ -22,6 +22,7 @@ pub enum MonitoringCreateAlertPolicyError {
     Status401(models::Error),
     Status429(models::Error),
     Status500(models::Error),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 
@@ -33,6 +34,7 @@ pub enum MonitoringCreateDestinationError {
     Status404(models::Error),
     Status429(models::Error),
     Status500(models::Error),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 
@@ -44,6 +46,7 @@ pub enum MonitoringCreateSinkError {
     Status404(models::Error),
     Status429(models::Error),
     Status500(models::Error),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 
@@ -55,6 +58,7 @@ pub enum MonitoringDeleteAlertPolicyError {
     Status404(models::Error),
     Status429(models::Error),
     Status500(models::Error),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 
@@ -66,6 +70,7 @@ pub enum MonitoringDeleteDestinationError {
     Status404(models::Error),
     Status429(models::Error),
     Status500(models::Error),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 
@@ -77,6 +82,7 @@ pub enum MonitoringDeleteSinkError {
     Status404(models::Error),
     Status429(models::Error),
     Status500(models::Error),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 
@@ -88,6 +94,7 @@ pub enum MonitoringGetAlertPolicyError {
     Status404(models::Error),
     Status429(models::Error),
     Status500(models::Error),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 
@@ -98,6 +105,7 @@ pub enum MonitoringGetAppCpuPercentageMetricsError {
     Status401(models::Error),
     Status429(models::Error),
     Status500(models::Error),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 
@@ -108,6 +116,7 @@ pub enum MonitoringGetAppMemoryPercentageMetricsError {
     Status401(models::Error),
     Status429(models::Error),
     Status500(models::Error),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 
@@ -118,6 +127,7 @@ pub enum MonitoringGetAppRestartCountMetricsYmlError {
     Status401(models::Error),
     Status429(models::Error),
     Status500(models::Error),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 
@@ -129,6 +139,7 @@ pub enum MonitoringGetDestinationError {
     Status404(models::Error),
     Status429(models::Error),
     Status500(models::Error),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 
@@ -139,6 +150,7 @@ pub enum MonitoringGetDropletAutoscaleCurrentCpuUtilizationYmlError {
     Status401(models::Error),
     Status429(models::Error),
     Status500(models::Error),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 
@@ -149,6 +161,7 @@ pub enum MonitoringGetDropletAutoscaleCurrentInstancesError {
     Status401(models::Error),
     Status429(models::Error),
     Status500(models::Error),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 
@@ -159,6 +172,7 @@ pub enum MonitoringGetDropletAutoscaleCurrentMemoryUtilizationError {
     Status401(models::Error),
     Status429(models::Error),
     Status500(models::Error),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 
@@ -169,6 +183,7 @@ pub enum MonitoringGetDropletAutoscaleTargetCpuUtilizationError {
     Status401(models::Error),
     Status429(models::Error),
     Status500(models::Error),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 
@@ -179,6 +194,7 @@ pub enum MonitoringGetDropletAutoscaleTargetInstancesError {
     Status401(models::Error),
     Status429(models::Error),
     Status500(models::Error),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 
@@ -189,6 +205,7 @@ pub enum MonitoringGetDropletAutoscaleTargetMemoryUtilizationError {
     Status401(models::Error),
     Status429(models::Error),
     Status500(models::Error),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 
@@ -199,6 +216,7 @@ pub enum MonitoringGetDropletBandwidthMetricsError {
     Status401(models::Error),
     Status429(models::Error),
     Status500(models::Error),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 
@@ -209,6 +227,7 @@ pub enum MonitoringGetDropletCpuMetricsError {
     Status401(models::Error),
     Status429(models::Error),
     Status500(models::Error),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 
@@ -219,6 +238,7 @@ pub enum MonitoringGetDropletFilesystemFreeMetricsError {
     Status401(models::Error),
     Status429(models::Error),
     Status500(models::Error),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 
@@ -229,6 +249,7 @@ pub enum MonitoringGetDropletFilesystemSizeMetricsError {
     Status401(models::Error),
     Status429(models::Error),
     Status500(models::Error),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 
@@ -239,6 +260,7 @@ pub enum MonitoringGetDropletLoad15MetricsError {
     Status401(models::Error),
     Status429(models::Error),
     Status500(models::Error),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 
@@ -249,6 +271,7 @@ pub enum MonitoringGetDropletLoad1MetricsError {
     Status401(models::Error),
     Status429(models::Error),
     Status500(models::Error),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 
@@ -259,6 +282,7 @@ pub enum MonitoringGetDropletLoad5MetricsError {
     Status401(models::Error),
     Status429(models::Error),
     Status500(models::Error),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 
@@ -269,6 +293,7 @@ pub enum MonitoringGetDropletMemoryAvailableMetricsError {
     Status401(models::Error),
     Status429(models::Error),
     Status500(models::Error),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 
@@ -279,6 +304,7 @@ pub enum MonitoringGetDropletMemoryCachedMetricsError {
     Status401(models::Error),
     Status429(models::Error),
     Status500(models::Error),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 
@@ -289,6 +315,7 @@ pub enum MonitoringGetDropletMemoryFreeMetricsError {
     Status401(models::Error),
     Status429(models::Error),
     Status500(models::Error),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 
@@ -299,6 +326,7 @@ pub enum MonitoringGetDropletMemoryTotalMetricsError {
     Status401(models::Error),
     Status429(models::Error),
     Status500(models::Error),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 
@@ -309,6 +337,7 @@ pub enum MonitoringGetLbDropletsConnectionsError {
     Status401(models::Error),
     Status429(models::Error),
     Status500(models::Error),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 
@@ -319,6 +348,7 @@ pub enum MonitoringGetLbDropletsDowntimeError {
     Status401(models::Error),
     Status429(models::Error),
     Status500(models::Error),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 
@@ -329,6 +359,7 @@ pub enum MonitoringGetLbDropletsHealthChecksError {
     Status401(models::Error),
     Status429(models::Error),
     Status500(models::Error),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 
@@ -339,6 +370,7 @@ pub enum MonitoringGetLbDropletsHttpResponseTime50pError {
     Status401(models::Error),
     Status429(models::Error),
     Status500(models::Error),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 
@@ -349,6 +381,7 @@ pub enum MonitoringGetLbDropletsHttpResponseTime95pError {
     Status401(models::Error),
     Status429(models::Error),
     Status500(models::Error),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 
@@ -359,6 +392,7 @@ pub enum MonitoringGetLbDropletsHttpResponseTime99pError {
     Status401(models::Error),
     Status429(models::Error),
     Status500(models::Error),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 
@@ -369,6 +403,7 @@ pub enum MonitoringGetLbDropletsHttpResponseTimeAvgError {
     Status401(models::Error),
     Status429(models::Error),
     Status500(models::Error),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 
@@ -379,6 +414,7 @@ pub enum MonitoringGetLbDropletsHttpResponsesError {
     Status401(models::Error),
     Status429(models::Error),
     Status500(models::Error),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 
@@ -389,6 +425,7 @@ pub enum MonitoringGetLbDropletsHttpSessionDuration50pError {
     Status401(models::Error),
     Status429(models::Error),
     Status500(models::Error),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 
@@ -399,6 +436,7 @@ pub enum MonitoringGetLbDropletsHttpSessionDuration95pError {
     Status401(models::Error),
     Status429(models::Error),
     Status500(models::Error),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 
@@ -409,6 +447,7 @@ pub enum MonitoringGetLbDropletsHttpSessionDurationAvgError {
     Status401(models::Error),
     Status429(models::Error),
     Status500(models::Error),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 
@@ -419,6 +458,7 @@ pub enum MonitoringGetLbDropletsQueueSizeError {
     Status401(models::Error),
     Status429(models::Error),
     Status500(models::Error),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 
@@ -429,6 +469,7 @@ pub enum MonitoringGetLbFrontendConnectionsCurrentError {
     Status401(models::Error),
     Status429(models::Error),
     Status500(models::Error),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 
@@ -439,6 +480,7 @@ pub enum MonitoringGetLbFrontendConnectionsLimitError {
     Status401(models::Error),
     Status429(models::Error),
     Status500(models::Error),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 
@@ -449,6 +491,7 @@ pub enum MonitoringGetLbFrontendCpuUtilizationError {
     Status401(models::Error),
     Status429(models::Error),
     Status500(models::Error),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 
@@ -459,6 +502,7 @@ pub enum MonitoringGetLbFrontendFirewallDroppedBytesError {
     Status401(models::Error),
     Status429(models::Error),
     Status500(models::Error),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 
@@ -469,6 +513,7 @@ pub enum MonitoringGetLbFrontendFirewallDroppedPacketsError {
     Status401(models::Error),
     Status429(models::Error),
     Status500(models::Error),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 
@@ -479,6 +524,7 @@ pub enum MonitoringGetLbFrontendHttpRequestsPerSecondError {
     Status401(models::Error),
     Status429(models::Error),
     Status500(models::Error),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 
@@ -489,6 +535,7 @@ pub enum MonitoringGetLbFrontendHttpResponsesError {
     Status401(models::Error),
     Status429(models::Error),
     Status500(models::Error),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 
@@ -499,6 +546,7 @@ pub enum MonitoringGetLbFrontendNetworkThroughputHttpError {
     Status401(models::Error),
     Status429(models::Error),
     Status500(models::Error),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 
@@ -509,6 +557,7 @@ pub enum MonitoringGetLbFrontendNetworkThroughputTcpError {
     Status401(models::Error),
     Status429(models::Error),
     Status500(models::Error),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 
@@ -519,6 +568,7 @@ pub enum MonitoringGetLbFrontendNetworkThroughputUdpError {
     Status401(models::Error),
     Status429(models::Error),
     Status500(models::Error),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 
@@ -529,6 +579,7 @@ pub enum MonitoringGetLbFrontendNlbTcpNetworkThroughputError {
     Status401(models::Error),
     Status429(models::Error),
     Status500(models::Error),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 
@@ -539,6 +590,7 @@ pub enum MonitoringGetLbFrontendNlbUdpNetworkThroughputError {
     Status401(models::Error),
     Status429(models::Error),
     Status500(models::Error),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 
@@ -549,6 +601,7 @@ pub enum MonitoringGetLbFrontendTlsConnectionsCurrentError {
     Status401(models::Error),
     Status429(models::Error),
     Status500(models::Error),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 
@@ -559,6 +612,7 @@ pub enum MonitoringGetLbFrontendTlsConnectionsExceedingRateLimitError {
     Status401(models::Error),
     Status429(models::Error),
     Status500(models::Error),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 
@@ -569,6 +623,7 @@ pub enum MonitoringGetLbFrontendTlsConnectionsLimitError {
     Status401(models::Error),
     Status429(models::Error),
     Status500(models::Error),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 
@@ -580,6 +635,7 @@ pub enum MonitoringGetSinkError {
     Status404(models::Error),
     Status429(models::Error),
     Status500(models::Error),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 
@@ -590,6 +646,7 @@ pub enum MonitoringListAlertPolicyError {
     Status401(models::Error),
     Status429(models::Error),
     Status500(models::Error),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 
@@ -601,6 +658,7 @@ pub enum MonitoringListDestinationsError {
     Status404(models::Error),
     Status429(models::Error),
     Status500(models::Error),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 
@@ -612,6 +670,7 @@ pub enum MonitoringListSinksError {
     Status404(models::Error),
     Status429(models::Error),
     Status500(models::Error),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 
@@ -623,6 +682,7 @@ pub enum MonitoringUpdateAlertPolicyError {
     Status404(models::Error),
     Status429(models::Error),
     Status500(models::Error),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 
@@ -634,6 +694,7 @@ pub enum MonitoringUpdateDestinationError {
     Status404(models::Error),
     Status429(models::Error),
     Status500(models::Error),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 

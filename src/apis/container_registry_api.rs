@@ -22,6 +22,7 @@ pub enum RegistryCreateError {
     Status401(models::Error),
     Status429(models::Error),
     Status500(models::Error),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 
@@ -34,6 +35,7 @@ pub enum RegistryDeleteError {
     Status412(models::Error),
     Status429(models::Error),
     Status500(models::Error),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 
@@ -45,6 +47,7 @@ pub enum RegistryDeleteRepositoryManifestError {
     Status404(models::Error),
     Status429(models::Error),
     Status500(models::Error),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 
@@ -56,6 +59,7 @@ pub enum RegistryDeleteRepositoryTagError {
     Status404(models::Error),
     Status429(models::Error),
     Status500(models::Error),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 
@@ -67,6 +71,7 @@ pub enum RegistryGetError {
     Status412(models::Error),
     Status429(models::Error),
     Status500(models::Error),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 
@@ -77,6 +82,7 @@ pub enum RegistryGetDockerCredentialsError {
     Status401(models::Error),
     Status429(models::Error),
     Status500(models::Error),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 
@@ -88,6 +94,7 @@ pub enum RegistryGetGarbageCollectionError {
     Status404(models::Error),
     Status429(models::Error),
     Status500(models::Error),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 
@@ -98,6 +105,7 @@ pub enum RegistryGetOptionsError {
     Status401(models::Error),
     Status429(models::Error),
     Status500(models::Error),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 
@@ -108,6 +116,7 @@ pub enum RegistryGetSubscriptionError {
     Status401(models::Error),
     Status429(models::Error),
     Status500(models::Error),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 
@@ -119,6 +128,7 @@ pub enum RegistryListGarbageCollectionsError {
     Status404(models::Error),
     Status429(models::Error),
     Status500(models::Error),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 
@@ -130,6 +140,7 @@ pub enum RegistryListRepositoriesError {
     Status404(models::Error),
     Status429(models::Error),
     Status500(models::Error),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 
@@ -142,6 +153,7 @@ pub enum RegistryListRepositoriesV2Error {
     Status404(models::Error),
     Status429(models::Error),
     Status500(models::Error),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 
@@ -153,6 +165,7 @@ pub enum RegistryListRepositoryManifestsError {
     Status404(models::Error),
     Status429(models::Error),
     Status500(models::Error),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 
@@ -164,6 +177,7 @@ pub enum RegistryListRepositoryTagsError {
     Status404(models::Error),
     Status429(models::Error),
     Status500(models::Error),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 
@@ -175,6 +189,7 @@ pub enum RegistryRunGarbageCollectionError {
     Status404(models::Error),
     Status429(models::Error),
     Status500(models::Error),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 
@@ -186,6 +201,7 @@ pub enum RegistryUpdateGarbageCollectionError {
     Status404(models::Error),
     Status429(models::Error),
     Status500(models::Error),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 
@@ -197,6 +213,7 @@ pub enum RegistryUpdateSubscriptionError {
     Status412(models::Error),
     Status429(models::Error),
     Status500(models::Error),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 
@@ -208,6 +225,7 @@ pub enum RegistryValidateNameError {
     Status409(models::Error),
     Status429(models::Error),
     Status500(models::Error),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 

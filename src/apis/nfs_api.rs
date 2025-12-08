@@ -23,6 +23,7 @@ pub enum NfsCreateError {
     Status401(models::Error),
     Status429(models::Error),
     Status500(models::Error),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 
@@ -34,6 +35,7 @@ pub enum NfsDeleteError {
     Status404(models::Error),
     Status429(models::Error),
     Status500(models::Error),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 
@@ -45,6 +47,7 @@ pub enum NfsDeleteSnapshotError {
     Status404(models::Error),
     Status429(models::Error),
     Status500(models::Error),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 
@@ -56,6 +59,7 @@ pub enum NfsGetError {
     Status404(models::Error),
     Status429(models::Error),
     Status500(models::Error),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 
@@ -67,6 +71,7 @@ pub enum NfsGetSnapshotError {
     Status404(models::Error),
     Status429(models::Error),
     Status500(models::Error),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 
@@ -78,6 +83,7 @@ pub enum NfsListError {
     Status404(models::Error),
     Status429(models::Error),
     Status500(models::Error),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 
@@ -89,6 +95,7 @@ pub enum NfsListSnapshotError {
     Status404(models::Error),
     Status429(models::Error),
     Status500(models::Error),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 

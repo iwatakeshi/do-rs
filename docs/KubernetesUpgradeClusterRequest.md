@@ -1,0 +1,11 @@
+# KubernetesUpgradeClusterRequest
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**version** | Option<**String**> | The slug identifier for the version of Kubernetes that the cluster will be upgraded to. | [optional]
+
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

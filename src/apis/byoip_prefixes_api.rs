@@ -23,6 +23,7 @@ pub enum ByoipPrefixesCreateError {
     Status422(models::Error),
     Status429(models::Error),
     Status500(models::Error),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 
@@ -35,6 +36,7 @@ pub enum ByoipPrefixesDeleteError {
     Status422(models::Error),
     Status429(models::Error),
     Status500(models::Error),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 
@@ -47,6 +49,7 @@ pub enum ByoipPrefixesGetError {
     Status422(models::Error),
     Status429(models::Error),
     Status500(models::Error),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 
@@ -57,6 +60,7 @@ pub enum ByoipPrefixesListError {
     Status401(models::Error),
     Status429(models::Error),
     Status500(models::Error),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 
@@ -68,6 +72,7 @@ pub enum ByoipPrefixesListResourcesError {
     Status404(models::Error),
     Status429(models::Error),
     Status500(models::Error),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 
@@ -80,6 +85,7 @@ pub enum ByoipPrefixesPatchError {
     Status422(models::Error),
     Status429(models::Error),
     Status500(models::Error),
+    DefaultResponse(models::Error),
     UnknownValue(serde_json::Value),
 }
 
