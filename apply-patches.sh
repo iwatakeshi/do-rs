@@ -3,13 +3,32 @@
 # This script applies custom patches to the generated OpenAPI client code.
 # It should be run after code generation to preserve necessary modifications
 # that are not possible through OpenAPI spec customization.
+#
+# Usage: ./apply-patches.sh [VERSION]
+#   VERSION: Optional version number to set in Cargo.toml (e.g., "0.1.2")
 
 set -e  # Exit on error
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PATCHES_DIR="${SCRIPT_DIR}/patches"
+VERSION="${1:-}"
 
 echo "Applying custom patches to generated code..."
+
+# Replace Cargo.toml with our version that includes dev-dependencies
+# The OpenAPI Generator overwrites Cargo.toml with a minimal version
+CARGO_FILE="${SCRIPT_DIR}/Cargo.toml"
+CARGO_PATCH="${PATCHES_DIR}/Cargo.toml"
+if [ -f "$CARGO_PATCH" ]; then
+    echo "Replacing Cargo.toml with patched version..."
+    cp "$CARGO_PATCH" "$CARGO_FILE"
+    # Update version if provided as argument
+    if [ -n "$VERSION" ]; then
+        echo "  Updating version to $VERSION..."
+        sed -i "s/^version = \".*\"/version = \"$VERSION\"/" "$CARGO_FILE"
+    fi
+    echo "  ✓ Replaced Cargo.toml (preserves dev-dependencies and custom metadata)"
+fi
 
 # Fix serde_as compilation errors in credentials.rs
 # The OpenAPI Generator incorrectly generates serde_as attributes that cause compilation errors.

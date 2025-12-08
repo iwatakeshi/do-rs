@@ -1,145 +1,145 @@
 name: Quarterly Release
 
 on:
-  schedule:
-    # Run every 3 months on the 1st day at 00:00 UTC
-    # January, April, July, October
-    - cron: '0 0 1 1,4,7,10 *'
-  workflow_dispatch: # Allow manual triggering
+    schedule:
+        # Run every 3 months on the 1st day at 00:00 UTC
+        # January, April, July, October
+        - cron: "0 0 1 1,4,7,10 *"
+    workflow_dispatch: # Allow manual triggering
 
 permissions:
-  contents: write
+    contents: write
 
 jobs:
-  generate-and-release:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
+    generate-and-release:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v4
+              with:
+                  fetch-depth: 0
 
-      - name: Set up Java (required for OpenAPI Generator)
-        uses: actions/setup-java@v4
-        with:
-          distribution: 'temurin'
-          java-version: '17'
+            - name: Set up Java (required for OpenAPI Generator)
+              uses: actions/setup-java@v4
+              with:
+                  distribution: "temurin"
+                  java-version: "17"
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
+            - name: Set up Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: "20"
 
-      - name: Install OpenAPI Generator CLI
-        run: npm install @openapitools/openapi-generator-cli@2.15.3
+            - name: Install OpenAPI Generator CLI
+              run: npm install @openapitools/openapi-generator-cli@2.15.3
 
-      - name: Get current version
-        id: current_version
-        run: |
-          CURRENT_VERSION=$(grep '^version = ' Cargo.toml | head -1 | sed 's/version = "\(.*\)"/\1/')
-          echo "version=$CURRENT_VERSION" >> $GITHUB_OUTPUT
+            - name: Get current version
+              id: current_version
+              run: |
+                  CURRENT_VERSION=$(grep '^version = ' Cargo.toml | head -1 | sed 's/version = "\(.*\)"/\1/')
+                  echo "version=$CURRENT_VERSION" >> $GITHUB_OUTPUT
 
-      - name: Calculate next version
-        id: next_version
-        run: |
-          CURRENT="${{ steps.current_version.outputs.version }}"
-          # Parse major.minor.patch
-          IFS='.' read -r MAJOR MINOR PATCH <<< "$CURRENT"
-          # Increment patch version
-          PATCH=$((PATCH + 1))
-          NEXT_VERSION="${MAJOR}.${MINOR}.${PATCH}"
-          echo "version=$NEXT_VERSION" >> $GITHUB_OUTPUT
+            - name: Calculate next version
+              id: next_version
+              run: |
+                  CURRENT="${{ steps.current_version.outputs.version }}"
+                  # Parse major.minor.patch
+                  IFS='.' read -r MAJOR MINOR PATCH <<< "$CURRENT"
+                  # Increment patch version
+                  PATCH=$((PATCH + 1))
+                  NEXT_VERSION="${MAJOR}.${MINOR}.${PATCH}"
+                  echo "version=$NEXT_VERSION" >> $GITHUB_OUTPUT
 
-      - name: Generate Rust client from OpenAPI spec
-        run: |
-          npx @openapitools/openapi-generator-cli generate \
-            -i https://api-engineering.nyc3.cdn.digitaloceanspaces.com/spec-ci/DigitalOcean-public.v2.yaml \
-            -g rust \
-            -o . \
-            --additional-properties=packageName=digitalocean,packageVersion=${{ steps.next_version.outputs.version }}
+            - name: Generate Rust client from OpenAPI spec
+              run: |
+                  npx @openapitools/openapi-generator-cli generate \
+                    -i https://api-engineering.nyc3.cdn.digitaloceanspaces.com/spec-ci/DigitalOcean-public.v2.yaml \
+                    -g rust \
+                    -o . \
+                    --additional-properties=packageName=digitalocean,packageVersion=${{ steps.next_version.outputs.version }}
 
-      - name: Apply custom patches
-        run: |
-          chmod +x apply-patches.sh
-          ./apply-patches.sh
+            - name: Apply custom patches
+              run: |
+                  chmod +x apply-patches.sh
+                  ./apply-patches.sh ${{ steps.next_version.outputs.version }}
 
-      - name: Set up Rust
-        uses: dtolnay/rust-toolchain@stable
+            - name: Set up Rust
+              uses: dtolnay/rust-toolchain@stable
 
-      - name: Verify generated code compiles
-        run: cargo check
+            - name: Verify generated code compiles
+              run: cargo check
 
-      - name: Run tests
-        run: cargo test
+            - name: Run tests
+              run: cargo test
 
-      - name: Check for changes
-        id: changes
-        run: |
-          git add -A
-          if git diff --cached --quiet; then
-            echo "has_changes=false" >> $GITHUB_OUTPUT
-          else
-            echo "has_changes=true" >> $GITHUB_OUTPUT
-          fi
+            - name: Check for changes
+              id: changes
+              run: |
+                  git add -A
+                  if git diff --cached --quiet; then
+                    echo "has_changes=false" >> $GITHUB_OUTPUT
+                  else
+                    echo "has_changes=true" >> $GITHUB_OUTPUT
+                  fi
 
-      - name: Configure Git
-        if: steps.changes.outputs.has_changes == 'true'
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
+            - name: Configure Git
+              if: steps.changes.outputs.has_changes == 'true'
+              run: |
+                  git config user.name "github-actions[bot]"
+                  git config user.email "github-actions[bot]@users.noreply.github.com"
 
-      - name: Commit changes
-        if: steps.changes.outputs.has_changes == 'true'
-        run: |
-          git commit -m "chore: regenerate client and bump version to v${{ steps.next_version.outputs.version }}"
+            - name: Commit changes
+              if: steps.changes.outputs.has_changes == 'true'
+              run: |
+                  git commit -m "chore: regenerate client and bump version to v${{ steps.next_version.outputs.version }}"
 
-      - name: Create tag
-        if: steps.changes.outputs.has_changes == 'true'
-        run: |
-          git tag -a "v${{ steps.next_version.outputs.version }}" -m "Release v${{ steps.next_version.outputs.version }}"
+            - name: Create tag
+              if: steps.changes.outputs.has_changes == 'true'
+              run: |
+                  git tag -a "v${{ steps.next_version.outputs.version }}" -m "Release v${{ steps.next_version.outputs.version }}"
 
-      - name: Push changes and tag
-        if: steps.changes.outputs.has_changes == 'true'
-        run: |
-          git push origin HEAD
-          git push origin "v${{ steps.next_version.outputs.version }}"
+            - name: Push changes and tag
+              if: steps.changes.outputs.has_changes == 'true'
+              run: |
+                  git push origin HEAD
+                  git push origin "v${{ steps.next_version.outputs.version }}"
 
-      - name: Generate release notes
-        if: steps.changes.outputs.has_changes == 'true'
-        id: release_notes
-        run: |
-          RELEASE_DATE=$(date +%Y-%m-%d)
-          
-          {
-            echo "notes<<EOF"
-            echo "## Release v${{ steps.next_version.outputs.version }}"
-            echo ""
-            echo "**Release Date:** $RELEASE_DATE"
-            echo ""
-            echo "### Changes"
-            echo ""
-            echo "- Regenerated Rust client from the latest DigitalOcean OpenAPI specification"
-            echo "- Updated to version ${{ steps.next_version.outputs.version }}"
-            echo ""
-            echo "### Installation"
-            echo ""
-            echo "\`\`\`toml"
-            echo "[dependencies]"
-            echo "digitalocean = { git = \"https://github.com/iwatakeshi/do-rs\", tag = \"v${{ steps.next_version.outputs.version }}\" }"
-            echo "\`\`\`"
-            echo ""
-            echo "### Notes"
-            echo ""
-            echo "This release is auto-generated from the [DigitalOcean OpenAPI specification](https://github.com/digitalocean/openapi)."
-            echo "EOF"
-          } >> $GITHUB_OUTPUT
+            - name: Generate release notes
+              if: steps.changes.outputs.has_changes == 'true'
+              id: release_notes
+              run: |
+                  RELEASE_DATE=$(date +%Y-%m-%d)
 
-      - name: Create GitHub Release
-        if: steps.changes.outputs.has_changes == 'true'
-        uses: softprops/action-gh-release@v2
-        with:
-          tag_name: v${{ steps.next_version.outputs.version }}
-          name: v${{ steps.next_version.outputs.version }}
-          body: ${{ steps.release_notes.outputs.notes }}
-          draft: false
-          prerelease: false
+                  {
+                    echo "notes<<EOF"
+                    echo "## Release v${{ steps.next_version.outputs.version }}"
+                    echo ""
+                    echo "**Release Date:** $RELEASE_DATE"
+                    echo ""
+                    echo "### Changes"
+                    echo ""
+                    echo "- Regenerated Rust client from the latest DigitalOcean OpenAPI specification"
+                    echo "- Updated to version ${{ steps.next_version.outputs.version }}"
+                    echo ""
+                    echo "### Installation"
+                    echo ""
+                    echo "\`\`\`toml"
+                    echo "[dependencies]"
+                    echo "digitalocean = { git = \"https://github.com/iwatakeshi/do-rs\", tag = \"v${{ steps.next_version.outputs.version }}\" }"
+                    echo "\`\`\`"
+                    echo ""
+                    echo "### Notes"
+                    echo ""
+                    echo "This release is auto-generated from the [DigitalOcean OpenAPI specification](https://github.com/digitalocean/openapi)."
+                    echo "EOF"
+                  } >> $GITHUB_OUTPUT
+
+            - name: Create GitHub Release
+              if: steps.changes.outputs.has_changes == 'true'
+              uses: softprops/action-gh-release@v2
+              with:
+                  tag_name: v${{ steps.next_version.outputs.version }}
+                  name: v${{ steps.next_version.outputs.version }}
+                  body: ${{ steps.release_notes.outputs.notes }}
+                  draft: false
+                  prerelease: false

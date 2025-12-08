@@ -24,6 +24,7 @@ Patches are applied in numerical order:
 
 The `apply-patches.sh` script also replaces certain generated files with corrected versions:
 
+- **Cargo.toml**: Replaces the generated `Cargo.toml` with our version that includes dev-dependencies (`tokio`, `wiremock`) and custom package metadata. The version number is updated automatically when the script is called with a version argument.
 - **credentials.rs**: Replaces `src/models/credentials.rs` with a corrected version that doesn't include the broken `#[serde_as]` attributes. The OpenAPI Generator incorrectly generates `serde_as` attributes with `Vec<u8>` fields that cause compilation errors. The corrected version uses `Option<String>` fields instead.
 
 ## How Patches Work
