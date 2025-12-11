@@ -1,0 +1,7 @@
+--- a/src/lib.rs
++++ b/src/lib.rs
+@@ -8,3 +8,4 @@ extern crate url;
+ 
+ pub mod apis;
+ pub mod models;
++pub mod pagination;

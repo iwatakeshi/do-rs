@@ -19,6 +19,9 @@ Patches are applied in numerical order:
 - **001-droplet-ssh-keys-union-type.patch**: Converts `DropletCreateSshKeysInner` from an empty struct to an enum supporting both integer IDs and string fingerprints
 - **002-droplet-ssh-keys-tests.patch**: Adds comprehensive tests for the SSH keys union type
 - **003-size-networking-throughput.patch**: Adds the missing `networking_throughput` field to the `Size` struct. This field is returned by the DigitalOcean API but not defined in the OpenAPI spec, causing deserialization failures for `DropletsCreate202Response`.
+- **004-action-link-id-i64.patch**: Changes `ActionLink.id` from `i32` to `i64` to handle action IDs that exceed `i32::MAX`.
+- **005-image-regions-string.patch**: Changes `Image.regions` from `Vec<RegionSlug>` to `Vec<String>` for forward compatibility with new regions like `atl1` not yet in the enum.
+- **006-pagination-module.patch**: Adds `pub mod pagination;` export to `lib.rs` for the pagination helper module.
 - **droplet_with_ssh_keys.rs**: Example file demonstrating SSH keys usage (copied to `examples/`)
 
 ### File Replacements
@@ -27,6 +30,7 @@ The `apply-patches.sh` script also replaces certain generated files with correct
 
 - **Cargo.toml**: Replaces the generated `Cargo.toml` with our version that includes dev-dependencies (`tokio`, `wiremock`) and custom package metadata. The version number is updated automatically when the script is called with a version argument.
 - **credentials.rs**: Replaces `src/models/credentials.rs` with a corrected version that doesn't include the broken `#[serde_as]` attributes. The OpenAPI Generator incorrectly generates `serde_as` attributes with `Vec<u8>` fields that cause compilation errors. The corrected version uses `Option<String>` fields instead.
+- **pagination.rs**: Adds `src/pagination.rs` - a custom pagination helper module with utilities for navigating paginated API responses, including `PaginatedResponse` trait, `PageRequest` builder, and URL parsing helpers.
 
 ## How Patches Work
 
