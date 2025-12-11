@@ -65,6 +65,11 @@ jobs:
 
             - name: Set up Rust
               uses: dtolnay/rust-toolchain@stable
+              with:
+                  components: rustfmt
+
+            - name: Format generated code
+              run: cargo fmt
 
             - name: Verify generated code compiles
               run: cargo check
