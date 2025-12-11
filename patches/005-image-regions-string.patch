@@ -1,0 +1,11 @@
+--- a/src/models/image.rs
++++ b/src/models/image.rs
+@@ -37,7 +37,7 @@ pub struct Image {
+     pub public: Option<bool>,
+     /// This attribute is an array of the regions that the image is available in. The regions are represented by their identifying slug values.
+     #[serde(rename = "regions", skip_serializing_if = "Option::is_none")]
+-    pub regions: Option<Vec<models::RegionSlug>>,
++    pub regions: Option<Vec<String>>,
+     /// A time value given in ISO8601 combined date and time format that represents when the image was created.
+     #[serde(rename = "created_at", skip_serializing_if = "Option::is_none")]
+     pub created_at: Option<String>,
