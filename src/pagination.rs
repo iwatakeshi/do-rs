@@ -5,25 +5,25 @@
 //!
 //! # Example
 //!
-//! ```rust,no_run
-//! use digitalocean_api::pagination::PaginatedResponse;
-//! use digitalocean_api::apis::reserved_ips_api::reserved_ips_list;
+//! ```rust,ignore
+//! use digitalocean::pagination::PaginatedResponse;
+//! use digitalocean::apis::reserved_ips_api::reserved_ips_list;
 //!
-//! # async fn example() -> Result<(), Box<dyn std::error::Error>> {
-//! # let configuration = todo!();
-//! // Fetch first page
-//! let response = reserved_ips_list(&configuration, Some(20), Some(1)).await?;
+//! async fn example() -> Result<(), Box<dyn std::error::Error>> {
+//!     let configuration = todo!();
+//!     // Fetch first page
+//!     let response = reserved_ips_list(&configuration, Some(20), Some(1)).await?;
 //!
-//! // Check pagination info
-//! println!("Total items: {}", response.total());
-//! println!("Has next page: {}", response.has_next_page());
+//!     // Check pagination info
+//!     println!("Total items: {}", response.total());
+//!     println!("Has next page: {}", response.has_next_page());
 //!
-//! // Get next page number if available
-//! if let Some(next_page) = response.next_page_number() {
-//!     let next_response = reserved_ips_list(&configuration, Some(20), Some(next_page)).await?;
+//!     // Get next page number if available
+//!     if let Some(next_page) = response.next_page_number() {
+//!         let next_response = reserved_ips_list(&configuration, Some(20), Some(next_page)).await?;
+//!     }
+//!     Ok(())
 //! }
-//! # Ok(())
-//! # }
 //! ```
 
 use crate::models::{PageLinks, PageLinksPages, MetaProperties};
@@ -112,7 +112,7 @@ pub trait PaginatedResponse {
 /// # Example
 ///
 /// ```rust
-/// use digitalocean_api::pagination::extract_page_number;
+/// use digitalocean::pagination::extract_page_number;
 ///
 /// let url = "https://api.digitalocean.com/v2/droplets?page=3&per_page=20";
 /// assert_eq!(extract_page_number(url), Some(3));
@@ -133,7 +133,7 @@ pub fn extract_page_number(url: &str) -> Option<i32> {
 /// # Example
 ///
 /// ```rust
-/// use digitalocean_api::pagination::extract_per_page;
+/// use digitalocean::pagination::extract_per_page;
 ///
 /// let url = "https://api.digitalocean.com/v2/droplets?page=3&per_page=50";
 /// assert_eq!(extract_per_page(url), Some(50));
@@ -151,7 +151,7 @@ pub fn extract_per_page(url: &str) -> Option<i32> {
 /// # Example
 ///
 /// ```rust
-/// use digitalocean_api::pagination::PageRequest;
+/// use digitalocean::pagination::PageRequest;
 ///
 /// let page = PageRequest::new()
 ///     .with_page(2)
