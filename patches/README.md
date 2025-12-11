@@ -18,6 +18,7 @@ Patches are applied in numerical order:
 
 - **001-droplet-ssh-keys-union-type.patch**: Converts `DropletCreateSshKeysInner` from an empty struct to an enum supporting both integer IDs and string fingerprints
 - **002-droplet-ssh-keys-tests.patch**: Adds comprehensive tests for the SSH keys union type
+- **003-size-networking-throughput.patch**: Adds the missing `networking_throughput` field to the `Size` struct. This field is returned by the DigitalOcean API but not defined in the OpenAPI spec, causing deserialization failures for `DropletsCreate202Response`.
 - **droplet_with_ssh_keys.rs**: Example file demonstrating SSH keys usage (copied to `examples/`)
 
 ### File Replacements

@@ -47,12 +47,14 @@ if [ -d "$PATCHES_DIR" ]; then
     for patch_file in "$PATCHES_DIR"/*.patch; do
         if [ -f "$patch_file" ]; then
             echo "Applying patch: $(basename "$patch_file")"
-            # Check if patch can be applied (ignoring "already applied" warnings)
-            if patch -p1 -N --dry-run --silent < "$patch_file" 2>&1 | grep -q "Reversed (or previously applied) patch detected"; then
+            # Check if patch can be applied using --dry-run with -R (reverse)
+            # If reverse succeeds, patch is already applied
+            # Use --batch to avoid interactive prompts, and echo 'n' as fallback
+            if echo 'n' | patch -p1 -R --dry-run --batch < "$patch_file" >/dev/null 2>&1; then
                 echo "  ⚠ Patch $(basename "$patch_file") already applied, skipping"
-            elif patch -p1 -N --dry-run --silent < "$patch_file" 2>&1; then
-                # Apply the patch for real
-                patch -p1 -N < "$patch_file"
+            elif patch -p1 --dry-run --batch < "$patch_file" >/dev/null 2>&1; then
+                # Patch can be applied cleanly
+                patch -p1 --batch < "$patch_file"
                 echo "  ✓ Successfully applied $(basename "$patch_file")"
             else
                 echo "  ✗ Failed to apply $(basename "$patch_file") - conflicts detected"

@@ -43,6 +43,9 @@ pub struct Size {
     /// A string describing the class of Droplets created from this size. For example: Basic, General Purpose, CPU-Optimized, Memory-Optimized, or Storage-Optimized.
     #[serde(rename = "description")]
     pub description: String,
+    /// The networking throughput (in Mbps) available for Droplets of this size.
+    #[serde(rename = "networking_throughput", skip_serializing_if = "Option::is_none")]
+    pub networking_throughput: Option<i32>,
     /// An array of objects containing information about the disks available to Droplets created with this size.
     #[serde(rename = "disk_info", skip_serializing_if = "Option::is_none")]
     pub disk_info: Option<Vec<models::DiskInfo>>,
@@ -63,6 +66,7 @@ impl Size {
             regions,
             available,
             description,
+            networking_throughput: None,
             disk_info: None,
             gpu_info: None,
         }
