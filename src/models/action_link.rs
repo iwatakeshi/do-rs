@@ -16,7 +16,7 @@ use serde::{Deserialize, Serialize};
 pub struct ActionLink {
     /// A unique numeric ID that can be used to identify and reference an action.
     #[serde(rename = "id", skip_serializing_if = "Option::is_none")]
-    pub id: Option<i32>,
+    pub id: Option<i64>,
     /// A string specifying the type of the related action.
     #[serde(rename = "rel", skip_serializing_if = "Option::is_none")]
     pub rel: Option<String>,
