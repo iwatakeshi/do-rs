@@ -1916,8 +1916,7 @@ where
         D: Deserializer<'de>,
     {
         Ok(Some(
-            DeserializeAsWrap::<Option<T>, Option<TAs>>::deserialize(deserializer)?
-                .into_inner(),
+            DeserializeAsWrap::<Option<T>, Option<TAs>>::deserialize(deserializer)?.into_inner(),
         ))
     }
 }

@@ -62,7 +62,9 @@ fn test_parse_deep_object_multiple_keys() {
 
     assert_eq!(result.len(), 2);
     // Results may be in any order due to JSON object iteration
-    let has_name = result.iter().any(|(k, v)| k == "filter[name]" && v == "test");
+    let has_name = result
+        .iter()
+        .any(|(k, v)| k == "filter[name]" && v == "test");
     let has_id = result.iter().any(|(k, v)| k == "filter[id]" && v == "123");
     assert!(has_name);
     assert!(has_id);
@@ -122,7 +124,9 @@ fn test_parse_deep_object_with_numbers() {
 
     assert_eq!(result.len(), 2);
     let has_count = result.iter().any(|(k, v)| k == "data[count]" && v == "42");
-    let has_price = result.iter().any(|(k, v)| k == "data[price]" && v == "19.99");
+    let has_price = result
+        .iter()
+        .any(|(k, v)| k == "data[price]" && v == "19.99");
     assert!(has_count);
     assert!(has_price);
 }

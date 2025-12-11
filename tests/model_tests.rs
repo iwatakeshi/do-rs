@@ -235,8 +235,7 @@ fn test_action_status_variants() {
         serde_json::from_str(in_progress_json).unwrap();
     let completed: digitalocean::models::action::Status =
         serde_json::from_str(completed_json).unwrap();
-    let errored: digitalocean::models::action::Status =
-        serde_json::from_str(errored_json).unwrap();
+    let errored: digitalocean::models::action::Status = serde_json::from_str(errored_json).unwrap();
 
     assert_eq!(
         in_progress,
@@ -337,15 +336,15 @@ fn test_droplet_create_ssh_keys_inner_integer() {
 
     // Test creating from integer ID
     let ssh_key = DropletCreateSshKeysInner::from_id(12345);
-    
+
     // Test serialization
     let json = serde_json::to_string(&ssh_key).unwrap();
     assert_eq!(json, "12345");
-    
+
     // Test deserialization
     let deserialized: DropletCreateSshKeysInner = serde_json::from_str("12345").unwrap();
     assert_eq!(ssh_key, deserialized);
-    
+
     // Test From trait
     let from_int: DropletCreateSshKeysInner = 67890i64.into();
     let json2 = serde_json::to_string(&from_int).unwrap();
@@ -358,24 +357,28 @@ fn test_droplet_create_ssh_keys_inner_string() {
 
     // Test creating from fingerprint string
     let ssh_key = DropletCreateSshKeysInner::from_fingerprint(
-        "aa:bb:cc:dd:ee:ff:00:11:22:33:44:55:66:77:88:99".to_string()
+        "aa:bb:cc:dd:ee:ff:00:11:22:33:44:55:66:77:88:99".to_string(),
     );
-    
+
     // Test serialization
     let json = serde_json::to_string(&ssh_key).unwrap();
     assert_eq!(json, r#""aa:bb:cc:dd:ee:ff:00:11:22:33:44:55:66:77:88:99""#);
-    
+
     // Test deserialization
-    let deserialized: DropletCreateSshKeysInner = 
+    let deserialized: DropletCreateSshKeysInner =
         serde_json::from_str(r#""aa:bb:cc:dd:ee:ff:00:11:22:33:44:55:66:77:88:99""#).unwrap();
     assert_eq!(ssh_key, deserialized);
-    
+
     // Test From<String> trait
-    let from_string: DropletCreateSshKeysInner = 
-        "11:22:33:44:55:66:77:88:99:aa:bb:cc:dd:ee:ff:00".to_string().into();
+    let from_string: DropletCreateSshKeysInner = "11:22:33:44:55:66:77:88:99:aa:bb:cc:dd:ee:ff:00"
+        .to_string()
+        .into();
     let json2 = serde_json::to_string(&from_string).unwrap();
-    assert_eq!(json2, r#""11:22:33:44:55:66:77:88:99:aa:bb:cc:dd:ee:ff:00""#);
-    
+    assert_eq!(
+        json2,
+        r#""11:22:33:44:55:66:77:88:99:aa:bb:cc:dd:ee:ff:00""#
+    );
+
     // Test From<&str> trait
     let from_str: DropletCreateSshKeysInner = "test-fingerprint".into();
     let json3 = serde_json::to_string(&from_str).unwrap();
@@ -393,13 +396,16 @@ fn test_droplet_create_ssh_keys_inner_array() {
         456i64.into(),
         "fingerprint-string".into(),
     ];
-    
+
     // Test serialization of array
     let json = serde_json::to_string(&ssh_keys).unwrap();
-    assert_eq!(json, r#"[123,"aa:bb:cc:dd:ee:ff",456,"fingerprint-string"]"#);
-    
+    assert_eq!(
+        json,
+        r#"[123,"aa:bb:cc:dd:ee:ff",456,"fingerprint-string"]"#
+    );
+
     // Test deserialization of array
-    let deserialized: Vec<DropletCreateSshKeysInner> = 
+    let deserialized: Vec<DropletCreateSshKeysInner> =
         serde_json::from_str(r#"[123,"aa:bb:cc:dd:ee:ff",456,"fingerprint-string"]"#).unwrap();
     assert_eq!(ssh_keys, deserialized);
 }
@@ -411,18 +417,18 @@ fn test_droplet_create_with_ssh_keys() {
     // Create a droplet with SSH keys
     let image = DropletCreateImage::Integer(12345);
     let mut droplet = DropletCreate::new("s-1vcpu-1gb".to_string(), image);
-    
+
     droplet.ssh_keys = Some(vec![
         DropletCreateSshKeysInner::from_id(123),
         DropletCreateSshKeysInner::from_fingerprint("aa:bb:cc:dd:ee:ff".to_string()),
     ]);
-    
+
     // Serialize to JSON
     let json = serde_json::to_string(&droplet).unwrap();
-    
+
     // Verify the SSH keys are serialized correctly (should be an array with mixed types)
     assert!(json.contains(r#""ssh_keys":[123,"aa:bb:cc:dd:ee:ff"]"#));
-    
+
     // Deserialize back
     let deserialized: DropletCreate = serde_json::from_str(&json).unwrap();
     assert_eq!(droplet.ssh_keys, deserialized.ssh_keys);

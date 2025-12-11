@@ -17,15 +17,12 @@ fn main() {
     droplet.ssh_keys = Some(vec![
         // Using integer ID (e.g., from your DigitalOcean account)
         DropletCreateSshKeysInner::from_id(123456),
-        
         // Using fingerprint string
         DropletCreateSshKeysInner::from_fingerprint(
-            "aa:bb:cc:dd:ee:ff:00:11:22:33:44:55:66:77:88:99".to_string()
+            "aa:bb:cc:dd:ee:ff:00:11:22:33:44:55:66:77:88:99".to_string(),
         ),
-        
         // Using the From trait for convenience (integer)
         789012i64.into(),
-        
         // Using the From trait for convenience (string)
         "11:22:33:44:55:66:77:88:99:aa:bb:cc:dd:ee:ff:00".into(),
     ]);
