@@ -26,7 +26,7 @@
 //! }
 //! ```
 
-use crate::models::{PageLinks, PageLinksPages, MetaProperties};
+use crate::models::{MetaProperties, PageLinks, PageLinksPages};
 use url::Url;
 
 /// Trait for paginated API responses.
@@ -42,16 +42,12 @@ pub trait PaginatedResponse {
 
     /// Returns `true` if there is a next page of results.
     fn has_next_page(&self) -> bool {
-        self.page_links()
-            .map(|p| p.next.is_some())
-            .unwrap_or(false)
+        self.page_links().map(|p| p.next.is_some()).unwrap_or(false)
     }
 
     /// Returns `true` if there is a previous page of results.
     fn has_prev_page(&self) -> bool {
-        self.page_links()
-            .map(|p| p.prev.is_some())
-            .unwrap_or(false)
+        self.page_links().map(|p| p.prev.is_some()).unwrap_or(false)
     }
 
     /// Returns `true` if this is the first page.
