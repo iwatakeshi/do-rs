@@ -28,6 +28,18 @@ pub struct ApiModel {
     /// True if it is a foundational model provided by do
     #[serde(rename = "is_foundational", skip_serializing_if = "Option::is_none")]
     pub is_foundational: Option<bool>,
+    /// Default chunking size limit to show in UI
+    #[serde(
+        rename = "kb_default_chunk_size",
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub kb_default_chunk_size: Option<i64>,
+    /// Maximum chunk size limit of model
+    #[serde(rename = "kb_max_chunk_size", skip_serializing_if = "Option::is_none")]
+    pub kb_max_chunk_size: Option<i64>,
+    /// Minimum chunking size token limits if model supports KNOWLEDGEBASE usecase
+    #[serde(rename = "kb_min_chunk_size", skip_serializing_if = "Option::is_none")]
+    pub kb_min_chunk_size: Option<i64>,
     /// Additional meta data
     #[serde(rename = "metadata", skip_serializing_if = "Option::is_none")]
     pub metadata: Option<serde_json::Value>,
@@ -67,6 +79,9 @@ impl ApiModel {
             inference_name: None,
             inference_version: None,
             is_foundational: None,
+            kb_default_chunk_size: None,
+            kb_max_chunk_size: None,
+            kb_min_chunk_size: None,
             metadata: None,
             name: None,
             parent_uuid: None,

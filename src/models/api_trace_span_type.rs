@@ -11,34 +11,33 @@
 use crate::models;
 use serde::{Deserialize, Serialize};
 
-/// ApiRunEvaluationTestCaseInputPublic : Run an evaluation test case.
-#[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
-pub struct ApiRunEvaluationTestCaseInputPublic {
-    /// Agent deployment names to run the test case against (ADK agent workspaces).
-    #[serde(
-        rename = "agent_deployment_names",
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub agent_deployment_names: Option<Vec<String>>,
-    /// Agent UUIDs to run the test case against (legacy agents).
-    #[serde(rename = "agent_uuids", skip_serializing_if = "Option::is_none")]
-    pub agent_uuids: Option<Vec<String>>,
-    /// The name of the run.
-    #[serde(rename = "run_name", skip_serializing_if = "Option::is_none")]
-    pub run_name: Option<String>,
-    /// Test-case UUID to run
-    #[serde(rename = "test_case_uuid", skip_serializing_if = "Option::is_none")]
-    pub test_case_uuid: Option<String>,
+/// ApiTraceSpanType : Types of spans in a trace
+/// Types of spans in a trace
+#[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
+pub enum ApiTraceSpanType {
+    #[serde(rename = "TRACE_SPAN_TYPE_UNKNOWN")]
+    TraceSpanTypeUnknown,
+    #[serde(rename = "TRACE_SPAN_TYPE_LLM")]
+    TraceSpanTypeLlm,
+    #[serde(rename = "TRACE_SPAN_TYPE_RETRIEVER")]
+    TraceSpanTypeRetriever,
+    #[serde(rename = "TRACE_SPAN_TYPE_TOOL")]
+    TraceSpanTypeTool,
 }
 
-impl ApiRunEvaluationTestCaseInputPublic {
-    /// Run an evaluation test case.
-    pub fn new() -> ApiRunEvaluationTestCaseInputPublic {
-        ApiRunEvaluationTestCaseInputPublic {
-            agent_deployment_names: None,
-            agent_uuids: None,
-            run_name: None,
-            test_case_uuid: None,
+impl std::fmt::Display for ApiTraceSpanType {
+    fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
+        match self {
+            Self::TraceSpanTypeUnknown => write!(f, "TRACE_SPAN_TYPE_UNKNOWN"),
+            Self::TraceSpanTypeLlm => write!(f, "TRACE_SPAN_TYPE_LLM"),
+            Self::TraceSpanTypeRetriever => write!(f, "TRACE_SPAN_TYPE_RETRIEVER"),
+            Self::TraceSpanTypeTool => write!(f, "TRACE_SPAN_TYPE_TOOL"),
         }
+    }
+}
+
+impl Default for ApiTraceSpanType {
+    fn default() -> ApiTraceSpanType {
+        Self::TraceSpanTypeUnknown
     }
 }

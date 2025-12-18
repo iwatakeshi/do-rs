@@ -11,34 +11,34 @@
 use crate::models;
 use serde::{Deserialize, Serialize};
 
-/// ApiRunEvaluationTestCaseInputPublic : Run an evaluation test case.
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
-pub struct ApiRunEvaluationTestCaseInputPublic {
-    /// Agent deployment names to run the test case against (ADK agent workspaces).
-    #[serde(
-        rename = "agent_deployment_names",
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub agent_deployment_names: Option<Vec<String>>,
-    /// Agent UUIDs to run the test case against (legacy agents).
-    #[serde(rename = "agent_uuids", skip_serializing_if = "Option::is_none")]
-    pub agent_uuids: Option<Vec<String>>,
-    /// The name of the run.
-    #[serde(rename = "run_name", skip_serializing_if = "Option::is_none")]
-    pub run_name: Option<String>,
-    /// Test-case UUID to run
-    #[serde(rename = "test_case_uuid", skip_serializing_if = "Option::is_none")]
-    pub test_case_uuid: Option<String>,
+pub struct BillingInsightsList200Response {
+    /// Array of billing data points, which are day-over-day changes in billing resource usage based on nightly invoice item estimates, for the requested period
+    #[serde(rename = "data_points")]
+    pub data_points: Vec<models::BillingDataPoint>,
+    /// Total number of items available across all pages
+    #[serde(rename = "total_items")]
+    pub total_items: i32,
+    /// Total number of pages available
+    #[serde(rename = "total_pages")]
+    pub total_pages: i32,
+    /// Current page number
+    #[serde(rename = "current_page")]
+    pub current_page: i32,
 }
 
-impl ApiRunEvaluationTestCaseInputPublic {
-    /// Run an evaluation test case.
-    pub fn new() -> ApiRunEvaluationTestCaseInputPublic {
-        ApiRunEvaluationTestCaseInputPublic {
-            agent_deployment_names: None,
-            agent_uuids: None,
-            run_name: None,
-            test_case_uuid: None,
+impl BillingInsightsList200Response {
+    pub fn new(
+        data_points: Vec<models::BillingDataPoint>,
+        total_items: i32,
+        total_pages: i32,
+        current_page: i32,
+    ) -> BillingInsightsList200Response {
+        BillingInsightsList200Response {
+            data_points,
+            total_items,
+            total_pages,
+            current_page,
         }
     }
 }

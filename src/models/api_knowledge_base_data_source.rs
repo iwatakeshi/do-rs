@@ -19,6 +19,10 @@ pub struct ApiKnowledgeBaseDataSource {
     /// Name of storage bucket - Deprecated, moved to data_source_details
     #[serde(rename = "bucket_name", skip_serializing_if = "Option::is_none")]
     pub bucket_name: Option<String>,
+    #[serde(rename = "chunking_algorithm", skip_serializing_if = "Option::is_none")]
+    pub chunking_algorithm: Option<models::ApiChunkingAlgorithm>,
+    #[serde(rename = "chunking_options", skip_serializing_if = "Option::is_none")]
+    pub chunking_options: Option<Box<models::ApiChunkingOptions>>,
     /// Creation date / time
     #[serde(rename = "created_at", skip_serializing_if = "Option::is_none")]
     pub created_at: Option<String>,
@@ -69,6 +73,8 @@ impl ApiKnowledgeBaseDataSource {
         ApiKnowledgeBaseDataSource {
             aws_data_source: None,
             bucket_name: None,
+            chunking_algorithm: None,
+            chunking_options: None,
             created_at: None,
             dropbox_data_source: None,
             file_upload_data_source: None,

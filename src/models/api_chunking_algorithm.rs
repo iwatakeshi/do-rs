@@ -11,34 +11,36 @@
 use crate::models;
 use serde::{Deserialize, Serialize};
 
-/// ApiRunEvaluationTestCaseInputPublic : Run an evaluation test case.
-#[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
-pub struct ApiRunEvaluationTestCaseInputPublic {
-    /// Agent deployment names to run the test case against (ADK agent workspaces).
-    #[serde(
-        rename = "agent_deployment_names",
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub agent_deployment_names: Option<Vec<String>>,
-    /// Agent UUIDs to run the test case against (legacy agents).
-    #[serde(rename = "agent_uuids", skip_serializing_if = "Option::is_none")]
-    pub agent_uuids: Option<Vec<String>>,
-    /// The name of the run.
-    #[serde(rename = "run_name", skip_serializing_if = "Option::is_none")]
-    pub run_name: Option<String>,
-    /// Test-case UUID to run
-    #[serde(rename = "test_case_uuid", skip_serializing_if = "Option::is_none")]
-    pub test_case_uuid: Option<String>,
+/// ApiChunkingAlgorithm : The chunking algorithm to use for processing data sources.  **Note: This feature requires enabling the knowledgebase enhancements feature preview flag.**
+/// The chunking algorithm to use for processing data sources.  **Note: This feature requires enabling the knowledgebase enhancements feature preview flag.**
+#[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
+pub enum ApiChunkingAlgorithm {
+    #[serde(rename = "CHUNKING_ALGORITHM_UNKNOWN")]
+    ChunkingAlgorithmUnknown,
+    #[serde(rename = "CHUNKING_ALGORITHM_SECTION_BASED")]
+    ChunkingAlgorithmSectionBased,
+    #[serde(rename = "CHUNKING_ALGORITHM_HIERARCHICAL")]
+    ChunkingAlgorithmHierarchical,
+    #[serde(rename = "CHUNKING_ALGORITHM_SEMANTIC")]
+    ChunkingAlgorithmSemantic,
+    #[serde(rename = "CHUNKING_ALGORITHM_FIXED_LENGTH")]
+    ChunkingAlgorithmFixedLength,
 }
 
-impl ApiRunEvaluationTestCaseInputPublic {
-    /// Run an evaluation test case.
-    pub fn new() -> ApiRunEvaluationTestCaseInputPublic {
-        ApiRunEvaluationTestCaseInputPublic {
-            agent_deployment_names: None,
-            agent_uuids: None,
-            run_name: None,
-            test_case_uuid: None,
+impl std::fmt::Display for ApiChunkingAlgorithm {
+    fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
+        match self {
+            Self::ChunkingAlgorithmUnknown => write!(f, "CHUNKING_ALGORITHM_UNKNOWN"),
+            Self::ChunkingAlgorithmSectionBased => write!(f, "CHUNKING_ALGORITHM_SECTION_BASED"),
+            Self::ChunkingAlgorithmHierarchical => write!(f, "CHUNKING_ALGORITHM_HIERARCHICAL"),
+            Self::ChunkingAlgorithmSemantic => write!(f, "CHUNKING_ALGORITHM_SEMANTIC"),
+            Self::ChunkingAlgorithmFixedLength => write!(f, "CHUNKING_ALGORITHM_FIXED_LENGTH"),
         }
+    }
+}
+
+impl Default for ApiChunkingAlgorithm {
+    fn default() -> ApiChunkingAlgorithm {
+        Self::ChunkingAlgorithmUnknown
     }
 }

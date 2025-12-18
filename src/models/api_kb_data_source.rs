@@ -21,6 +21,10 @@ pub struct ApiKbDataSource {
     /// Deprecated, moved to data_source_details
     #[serde(rename = "bucket_region", skip_serializing_if = "Option::is_none")]
     pub bucket_region: Option<String>,
+    #[serde(rename = "chunking_algorithm", skip_serializing_if = "Option::is_none")]
+    pub chunking_algorithm: Option<models::ApiChunkingAlgorithm>,
+    #[serde(rename = "chunking_options", skip_serializing_if = "Option::is_none")]
+    pub chunking_options: Option<Box<models::ApiChunkingOptions>>,
     #[serde(
         rename = "dropbox_data_source",
         skip_serializing_if = "Option::is_none"
@@ -53,6 +57,8 @@ impl ApiKbDataSource {
             aws_data_source: None,
             bucket_name: None,
             bucket_region: None,
+            chunking_algorithm: None,
+            chunking_options: None,
             dropbox_data_source: None,
             file_upload_data_source: None,
             google_drive_data_source: None,

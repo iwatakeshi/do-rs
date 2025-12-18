@@ -13,6 +13,11 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct ApiCreateEvaluationTestCaseInputPublic {
+    #[serde(
+        rename = "agent_workspace_name",
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub agent_workspace_name: Option<String>,
     /// Dataset against which the test‑case is executed.
     #[serde(rename = "dataset_uuid", skip_serializing_if = "Option::is_none")]
     pub dataset_uuid: Option<String>,
@@ -35,6 +40,7 @@ pub struct ApiCreateEvaluationTestCaseInputPublic {
 impl ApiCreateEvaluationTestCaseInputPublic {
     pub fn new() -> ApiCreateEvaluationTestCaseInputPublic {
         ApiCreateEvaluationTestCaseInputPublic {
+            agent_workspace_name: None,
             dataset_uuid: None,
             description: None,
             metrics: None,

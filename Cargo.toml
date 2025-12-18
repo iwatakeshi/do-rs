@@ -1,6 +1,6 @@
 [package]
 name = "digitalocean"
-version = "0.1.5"
+version = "0.1.6"
 authors = ["api-engineering@digitalocean.com"]
 description = "Auto-generated Rust client for the DigitalOcean API"
 license = "MIT"

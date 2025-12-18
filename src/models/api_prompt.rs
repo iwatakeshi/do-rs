@@ -13,6 +13,12 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct ApiPrompt {
+    /// The evaluated trace spans.
+    #[serde(
+        rename = "evaluation_trace_spans",
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub evaluation_trace_spans: Option<Vec<models::ApiEvaluationTraceSpan>>,
     /// The ground truth for the prompt.
     #[serde(rename = "ground_truth", skip_serializing_if = "Option::is_none")]
     pub ground_truth: Option<String>,
@@ -38,11 +44,15 @@ pub struct ApiPrompt {
         skip_serializing_if = "Option::is_none"
     )]
     pub prompt_level_metric_results: Option<Vec<models::ApiEvaluationMetricResult>>,
+    /// The trace id for the prompt.
+    #[serde(rename = "trace_id", skip_serializing_if = "Option::is_none")]
+    pub trace_id: Option<String>,
 }
 
 impl ApiPrompt {
     pub fn new() -> ApiPrompt {
         ApiPrompt {
+            evaluation_trace_spans: None,
             ground_truth: None,
             input: None,
             input_tokens: None,
@@ -51,6 +61,7 @@ impl ApiPrompt {
             prompt_chunks: None,
             prompt_id: None,
             prompt_level_metric_results: None,
+            trace_id: None,
         }
     }
 }

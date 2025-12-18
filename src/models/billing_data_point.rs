@@ -11,34 +11,41 @@
 use crate::models;
 use serde::{Deserialize, Serialize};
 
-/// ApiRunEvaluationTestCaseInputPublic : Run an evaluation test case.
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
-pub struct ApiRunEvaluationTestCaseInputPublic {
-    /// Agent deployment names to run the test case against (ADK agent workspaces).
-    #[serde(
-        rename = "agent_deployment_names",
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub agent_deployment_names: Option<Vec<String>>,
-    /// Agent UUIDs to run the test case against (legacy agents).
-    #[serde(rename = "agent_uuids", skip_serializing_if = "Option::is_none")]
-    pub agent_uuids: Option<Vec<String>>,
-    /// The name of the run.
-    #[serde(rename = "run_name", skip_serializing_if = "Option::is_none")]
-    pub run_name: Option<String>,
-    /// Test-case UUID to run
-    #[serde(rename = "test_case_uuid", skip_serializing_if = "Option::is_none")]
-    pub test_case_uuid: Option<String>,
+pub struct BillingDataPoint {
+    /// URN of the team that incurred the usage
+    #[serde(rename = "usage_team_urn", skip_serializing_if = "Option::is_none")]
+    pub usage_team_urn: Option<String>,
+    /// Start date of the billing data point in YYYY-MM-DD format
+    #[serde(rename = "start_date", skip_serializing_if = "Option::is_none")]
+    pub start_date: Option<String>,
+    /// Total amount for this data point in USD
+    #[serde(rename = "total_amount", skip_serializing_if = "Option::is_none")]
+    pub total_amount: Option<String>,
+    /// Region where the usage occurred
+    #[serde(rename = "region", skip_serializing_if = "Option::is_none")]
+    pub region: Option<String>,
+    /// Unique SKU identifier for the billed resource
+    #[serde(rename = "sku", skip_serializing_if = "Option::is_none")]
+    pub sku: Option<String>,
+    /// Description of the billed resource or service as shown on an invoice item
+    #[serde(rename = "description", skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
+    /// Optional invoice item group name of the billed resource or service, blank when not part an invoice item group
+    #[serde(rename = "group_description", skip_serializing_if = "Option::is_none")]
+    pub group_description: Option<String>,
 }
 
-impl ApiRunEvaluationTestCaseInputPublic {
-    /// Run an evaluation test case.
-    pub fn new() -> ApiRunEvaluationTestCaseInputPublic {
-        ApiRunEvaluationTestCaseInputPublic {
-            agent_deployment_names: None,
-            agent_uuids: None,
-            run_name: None,
-            test_case_uuid: None,
+impl BillingDataPoint {
+    pub fn new() -> BillingDataPoint {
+        BillingDataPoint {
+            usage_team_urn: None,
+            start_date: None,
+            total_amount: None,
+            region: None,
+            sku: None,
+            description: None,
+            group_description: None,
         }
     }
 }

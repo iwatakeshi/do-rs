@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**agent_workspace_name** | Option<**String**> |  | [optional]
 **dataset_uuid** | Option<**String**> | Dataset against which the test‑case is executed. | [optional]
 **description** | Option<**String**> | Description of the test case. | [optional]
 **metrics** | Option<**Vec<String>**> | Full metric list to use for evaluation test case. | [optional]

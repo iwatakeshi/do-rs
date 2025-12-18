@@ -16,6 +16,10 @@ use serde::{Deserialize, Serialize};
 pub struct ApiCreateKnowledgeBaseDataSourceInputPublic {
     #[serde(rename = "aws_data_source", skip_serializing_if = "Option::is_none")]
     pub aws_data_source: Option<Box<models::ApiAwsDataSource>>,
+    #[serde(rename = "chunking_algorithm", skip_serializing_if = "Option::is_none")]
+    pub chunking_algorithm: Option<models::ApiChunkingAlgorithm>,
+    #[serde(rename = "chunking_options", skip_serializing_if = "Option::is_none")]
+    pub chunking_options: Option<Box<models::ApiChunkingOptions>>,
     /// Knowledge base id
     #[serde(
         rename = "knowledge_base_uuid",
@@ -36,6 +40,8 @@ impl ApiCreateKnowledgeBaseDataSourceInputPublic {
     pub fn new() -> ApiCreateKnowledgeBaseDataSourceInputPublic {
         ApiCreateKnowledgeBaseDataSourceInputPublic {
             aws_data_source: None,
+            chunking_algorithm: None,
+            chunking_options: None,
             knowledge_base_uuid: None,
             spaces_data_source: None,
             web_crawler_data_source: None,

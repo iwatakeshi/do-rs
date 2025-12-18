@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **agent_deleted** | Option<**bool**> | Whether agent is deleted | [optional]
+**agent_deployment_name** | Option<**String**> | The agent deployment name | [optional]
 **agent_name** | Option<**String**> | Agent name | [optional]
 **agent_uuid** | Option<**String**> | Agent UUID. | [optional]
 **agent_version_hash** | Option<**String**> | Version hash | [optional]

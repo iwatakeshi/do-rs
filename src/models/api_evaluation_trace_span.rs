@@ -11,34 +11,45 @@
 use crate::models;
 use serde::{Deserialize, Serialize};
 
-/// ApiRunEvaluationTestCaseInputPublic : Run an evaluation test case.
+/// ApiEvaluationTraceSpan : Represents a span within an evaluatioin trace (e.g., LLM call, tool call, etc.)
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
-pub struct ApiRunEvaluationTestCaseInputPublic {
-    /// Agent deployment names to run the test case against (ADK agent workspaces).
+pub struct ApiEvaluationTraceSpan {
+    /// When the span was created
+    #[serde(rename = "created_at", skip_serializing_if = "Option::is_none")]
+    pub created_at: Option<String>,
+    /// Input data for the span (flexible structure - can be messages array, string, etc.)
+    #[serde(rename = "input", skip_serializing_if = "Option::is_none")]
+    pub input: Option<serde_json::Value>,
+    /// Name/identifier for the span
+    #[serde(rename = "name", skip_serializing_if = "Option::is_none")]
+    pub name: Option<String>,
+    /// Output data from the span (flexible structure - can be message, string, etc.)
+    #[serde(rename = "output", skip_serializing_if = "Option::is_none")]
+    pub output: Option<serde_json::Value>,
+    /// Any retriever span chunks that were included as part of the span.
+    #[serde(rename = "retriever_chunks", skip_serializing_if = "Option::is_none")]
+    pub retriever_chunks: Option<Vec<models::ApiPromptChunk>>,
+    /// The span-level metric results.
     #[serde(
-        rename = "agent_deployment_names",
+        rename = "span_level_metric_results",
         skip_serializing_if = "Option::is_none"
     )]
-    pub agent_deployment_names: Option<Vec<String>>,
-    /// Agent UUIDs to run the test case against (legacy agents).
-    #[serde(rename = "agent_uuids", skip_serializing_if = "Option::is_none")]
-    pub agent_uuids: Option<Vec<String>>,
-    /// The name of the run.
-    #[serde(rename = "run_name", skip_serializing_if = "Option::is_none")]
-    pub run_name: Option<String>,
-    /// Test-case UUID to run
-    #[serde(rename = "test_case_uuid", skip_serializing_if = "Option::is_none")]
-    pub test_case_uuid: Option<String>,
+    pub span_level_metric_results: Option<Vec<models::ApiEvaluationMetricResult>>,
+    #[serde(rename = "type", skip_serializing_if = "Option::is_none")]
+    pub r#type: Option<models::ApiTraceSpanType>,
 }
 
-impl ApiRunEvaluationTestCaseInputPublic {
-    /// Run an evaluation test case.
-    pub fn new() -> ApiRunEvaluationTestCaseInputPublic {
-        ApiRunEvaluationTestCaseInputPublic {
-            agent_deployment_names: None,
-            agent_uuids: None,
-            run_name: None,
-            test_case_uuid: None,
+impl ApiEvaluationTraceSpan {
+    /// Represents a span within an evaluatioin trace (e.g., LLM call, tool call, etc.)
+    pub fn new() -> ApiEvaluationTraceSpan {
+        ApiEvaluationTraceSpan {
+            created_at: None,
+            input: None,
+            name: None,
+            output: None,
+            retriever_chunks: None,
+            span_level_metric_results: None,
+            r#type: None,
         }
     }
 }

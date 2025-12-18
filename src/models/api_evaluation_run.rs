@@ -16,6 +16,12 @@ pub struct ApiEvaluationRun {
     /// Whether agent is deleted
     #[serde(rename = "agent_deleted", skip_serializing_if = "Option::is_none")]
     pub agent_deleted: Option<bool>,
+    /// The agent deployment name
+    #[serde(
+        rename = "agent_deployment_name",
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub agent_deployment_name: Option<String>,
     /// Agent name
     #[serde(rename = "agent_name", skip_serializing_if = "Option::is_none")]
     pub agent_name: Option<String>,
@@ -98,6 +104,7 @@ impl ApiEvaluationRun {
     pub fn new() -> ApiEvaluationRun {
         ApiEvaluationRun {
             agent_deleted: None,
+            agent_deployment_name: None,
             agent_name: None,
             agent_uuid: None,
             agent_version_hash: None,

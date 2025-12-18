@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**dataset_type** | Option<[**models::ApiEvaluationDatasetType**](apiEvaluationDatasetType.md)> |  | [optional]
 **file_upload_dataset** | Option<[**models::ApiFileUploadDataSource**](apiFileUploadDataSource.md)> |  | [optional]
 **name** | Option<**String**> | The name of the agent evaluation dataset. | [optional]
 

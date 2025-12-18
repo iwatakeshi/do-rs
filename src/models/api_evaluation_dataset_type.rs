@@ -11,34 +11,29 @@
 use crate::models;
 use serde::{Deserialize, Serialize};
 
-/// ApiRunEvaluationTestCaseInputPublic : Run an evaluation test case.
-#[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
-pub struct ApiRunEvaluationTestCaseInputPublic {
-    /// Agent deployment names to run the test case against (ADK agent workspaces).
-    #[serde(
-        rename = "agent_deployment_names",
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub agent_deployment_names: Option<Vec<String>>,
-    /// Agent UUIDs to run the test case against (legacy agents).
-    #[serde(rename = "agent_uuids", skip_serializing_if = "Option::is_none")]
-    pub agent_uuids: Option<Vec<String>>,
-    /// The name of the run.
-    #[serde(rename = "run_name", skip_serializing_if = "Option::is_none")]
-    pub run_name: Option<String>,
-    /// Test-case UUID to run
-    #[serde(rename = "test_case_uuid", skip_serializing_if = "Option::is_none")]
-    pub test_case_uuid: Option<String>,
+///
+#[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
+pub enum ApiEvaluationDatasetType {
+    #[serde(rename = "EVALUATION_DATASET_TYPE_UNKNOWN")]
+    EvaluationDatasetTypeUnknown,
+    #[serde(rename = "EVALUATION_DATASET_TYPE_ADK")]
+    EvaluationDatasetTypeAdk,
+    #[serde(rename = "EVALUATION_DATASET_TYPE_NON_ADK")]
+    EvaluationDatasetTypeNonAdk,
 }
 
-impl ApiRunEvaluationTestCaseInputPublic {
-    /// Run an evaluation test case.
-    pub fn new() -> ApiRunEvaluationTestCaseInputPublic {
-        ApiRunEvaluationTestCaseInputPublic {
-            agent_deployment_names: None,
-            agent_uuids: None,
-            run_name: None,
-            test_case_uuid: None,
+impl std::fmt::Display for ApiEvaluationDatasetType {
+    fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
+        match self {
+            Self::EvaluationDatasetTypeUnknown => write!(f, "EVALUATION_DATASET_TYPE_UNKNOWN"),
+            Self::EvaluationDatasetTypeAdk => write!(f, "EVALUATION_DATASET_TYPE_ADK"),
+            Self::EvaluationDatasetTypeNonAdk => write!(f, "EVALUATION_DATASET_TYPE_NON_ADK"),
         }
+    }
+}
+
+impl Default for ApiEvaluationDatasetType {
+    fn default() -> ApiEvaluationDatasetType {
+        Self::EvaluationDatasetTypeUnknown
     }
 }

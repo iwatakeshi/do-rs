@@ -6,6 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**balance_get**](BillingApi.md#balance_get) | **GET** /v2/customers/my/balance | Get Customer Balance
 [**billing_history_list**](BillingApi.md#billing_history_list) | **GET** /v2/customers/my/billing_history | List Billing History
+[**billing_insights_list**](BillingApi.md#billing_insights_list) | **GET** /v2/billing/{account_urn}/insights/{start_date}/{end_date} | List Billing Insights
 [**invoices_get_by_uuid**](BillingApi.md#invoices_get_by_uuid) | **GET** /v2/customers/my/invoices/{invoice_uuid} | Retrieve an Invoice by UUID
 [**invoices_get_csv_by_uuid**](BillingApi.md#invoices_get_csv_by_uuid) | **GET** /v2/customers/my/invoices/{invoice_uuid}/csv | Retrieve an Invoice CSV by UUID
 [**invoices_get_pdf_by_uuid**](BillingApi.md#invoices_get_pdf_by_uuid) | **GET** /v2/customers/my/invoices/{invoice_uuid}/pdf | Retrieve an Invoice PDF by UUID
@@ -55,6 +56,40 @@ This endpoint does not need any parameter.
 ### Return type
 
 [**models::BillingHistoryList200Response**](billingHistory_list_200_response.md)
+
+### Authorization
+
+[bearer_auth](../README.md#bearer_auth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+
+## billing_insights_list
+
+> models::BillingInsightsList200Response billing_insights_list(account_urn, start_date, end_date, per_page, page)
+List Billing Insights
+
+ This endpoint returns day-over-day changes in billing resource usage based on nightly invoice items, including total amount, region, SKU, and description for a specified date range. It is important to note that the daily resource usage may not reflect month-end billing totals when totaled for a given month as nightly invoice item estimates do not necessarily encompass all invoicing factors for the entire month.
+
+### Parameters
+
+
+Name | Type | Description  | Required | Notes
+------------- | ------------- | ------------- | ------------- | -------------
+**account_urn** | **String** | URN of the customer account, can be a team (do:team:uuid) or an organization (do:teamgroup:uuid) | [required] |
+**start_date** | **String** | Start date for billing insights in YYYY-MM-DD format | [required] |
+**end_date** | **String** | End date for billing insights in YYYY-MM-DD format. Must be within 31 days of start_date | [required] |
+**per_page** | Option<**i32**> | Number of items returned per page |  |[default to 20]
+**page** | Option<**i32**> | Which 'page' of paginated results to return. |  |[default to 1]
+
+### Return type
+
+[**models::BillingInsightsList200Response**](billingInsights_list_200_response.md)
 
 ### Authorization
 

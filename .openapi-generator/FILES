@@ -62,6 +62,8 @@ docs/ApiBatchJobPhase.md
 docs/ApiCancelKnowledgeBaseIndexingJobInputPublic.md
 docs/ApiCancelKnowledgeBaseIndexingJobOutput.md
 docs/ApiChatbot.md
+docs/ApiChunkingAlgorithm.md
+docs/ApiChunkingOptions.md
 docs/ApiCrawlingOption.md
 docs/ApiCreateAgentApiKeyInputPublic.md
 docs/ApiCreateAgentApiKeyOutput.md
@@ -104,6 +106,7 @@ docs/ApiDropboxDataSourceDisplay.md
 docs/ApiDropboxOauth2GetTokensInput.md
 docs/ApiDropboxOauth2GetTokensOutput.md
 docs/ApiEvaluationDataset.md
+docs/ApiEvaluationDatasetType.md
 docs/ApiEvaluationMetric.md
 docs/ApiEvaluationMetricCategory.md
 docs/ApiEvaluationMetricResult.md
@@ -113,6 +116,7 @@ docs/ApiEvaluationRun.md
 docs/ApiEvaluationRunStatus.md
 docs/ApiEvaluationTestCase.md
 docs/ApiEvaluationTestCaseMetricList.md
+docs/ApiEvaluationTraceSpan.md
 docs/ApiFilePresignedUrlResponse.md
 docs/ApiFileUploadDataSource.md
 docs/ApiGenerateOauth2UrlOutput.md
@@ -194,6 +198,7 @@ docs/ApiSpacesDataSource.md
 docs/ApiStarMetric.md
 docs/ApiStartKnowledgeBaseIndexingJobInputPublic.md
 docs/ApiStartKnowledgeBaseIndexingJobOutput.md
+docs/ApiTraceSpanType.md
 docs/ApiUnlinkAgentFunctionOutput.md
 docs/ApiUnlinkAgentOutput.md
 docs/ApiUnlinkKnowledgeBaseOutput.md
@@ -360,8 +365,10 @@ docs/Bgp.md
 docs/BgpBgp.md
 docs/BillingAddress.md
 docs/BillingApi.md
+docs/BillingDataPoint.md
 docs/BillingHistory.md
 docs/BillingHistoryList200Response.md
+docs/BillingInsightsList200Response.md
 docs/BlockStorageActionsApi.md
 docs/BlockStorageApi.md
 docs/ByoipPrefix.md
@@ -1102,6 +1109,8 @@ src/models/api_batch_job_phase.rs
 src/models/api_cancel_knowledge_base_indexing_job_input_public.rs
 src/models/api_cancel_knowledge_base_indexing_job_output.rs
 src/models/api_chatbot.rs
+src/models/api_chunking_algorithm.rs
+src/models/api_chunking_options.rs
 src/models/api_crawling_option.rs
 src/models/api_create_agent_api_key_input_public.rs
 src/models/api_create_agent_api_key_output.rs
@@ -1144,6 +1153,7 @@ src/models/api_dropbox_data_source_display.rs
 src/models/api_dropbox_oauth2_get_tokens_input.rs
 src/models/api_dropbox_oauth2_get_tokens_output.rs
 src/models/api_evaluation_dataset.rs
+src/models/api_evaluation_dataset_type.rs
 src/models/api_evaluation_metric.rs
 src/models/api_evaluation_metric_category.rs
 src/models/api_evaluation_metric_result.rs
@@ -1153,6 +1163,7 @@ src/models/api_evaluation_run.rs
 src/models/api_evaluation_run_status.rs
 src/models/api_evaluation_test_case.rs
 src/models/api_evaluation_test_case_metric_list.rs
+src/models/api_evaluation_trace_span.rs
 src/models/api_file_presigned_url_response.rs
 src/models/api_file_upload_data_source.rs
 src/models/api_generate_oauth2_url_output.rs
@@ -1234,6 +1245,7 @@ src/models/api_spaces_data_source.rs
 src/models/api_star_metric.rs
 src/models/api_start_knowledge_base_indexing_job_input_public.rs
 src/models/api_start_knowledge_base_indexing_job_output.rs
+src/models/api_trace_span_type.rs
 src/models/api_unlink_agent_function_output.rs
 src/models/api_unlink_agent_output.rs
 src/models/api_unlink_knowledge_base_output.rs
@@ -1398,8 +1410,10 @@ src/models/balance.rs
 src/models/bgp.rs
 src/models/bgp_bgp.rs
 src/models/billing_address.rs
+src/models/billing_data_point.rs
 src/models/billing_history.rs
 src/models/billing_history_list_200_response.rs
+src/models/billing_insights_list_200_response.rs
 src/models/byoip_prefix.rs
 src/models/byoip_prefix_create.rs
 src/models/byoip_prefix_resource.rs

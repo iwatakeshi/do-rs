@@ -11,34 +11,31 @@
 use crate::models;
 use serde::{Deserialize, Serialize};
 
-/// ApiRunEvaluationTestCaseInputPublic : Run an evaluation test case.
+/// ApiChunkingOptions : Configuration options for the chunking algorithm.  **Note: This feature requires enabling the knowledgebase enhancements feature preview flag.**
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
-pub struct ApiRunEvaluationTestCaseInputPublic {
-    /// Agent deployment names to run the test case against (ADK agent workspaces).
-    #[serde(
-        rename = "agent_deployment_names",
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub agent_deployment_names: Option<Vec<String>>,
-    /// Agent UUIDs to run the test case against (legacy agents).
-    #[serde(rename = "agent_uuids", skip_serializing_if = "Option::is_none")]
-    pub agent_uuids: Option<Vec<String>>,
-    /// The name of the run.
-    #[serde(rename = "run_name", skip_serializing_if = "Option::is_none")]
-    pub run_name: Option<String>,
-    /// Test-case UUID to run
-    #[serde(rename = "test_case_uuid", skip_serializing_if = "Option::is_none")]
-    pub test_case_uuid: Option<String>,
+pub struct ApiChunkingOptions {
+    /// Hierarchical options
+    #[serde(rename = "child_chunk_size", skip_serializing_if = "Option::is_none")]
+    pub child_chunk_size: Option<i64>,
+    /// Section_Based and Fixed_Length options
+    #[serde(rename = "max_chunk_size", skip_serializing_if = "Option::is_none")]
+    pub max_chunk_size: Option<i64>,
+    /// Hierarchical options
+    #[serde(rename = "parent_chunk_size", skip_serializing_if = "Option::is_none")]
+    pub parent_chunk_size: Option<i64>,
+    /// Semantic options
+    #[serde(rename = "semantic_threshold", skip_serializing_if = "Option::is_none")]
+    pub semantic_threshold: Option<f32>,
 }
 
-impl ApiRunEvaluationTestCaseInputPublic {
-    /// Run an evaluation test case.
-    pub fn new() -> ApiRunEvaluationTestCaseInputPublic {
-        ApiRunEvaluationTestCaseInputPublic {
-            agent_deployment_names: None,
-            agent_uuids: None,
-            run_name: None,
-            test_case_uuid: None,
+impl ApiChunkingOptions {
+    /// Configuration options for the chunking algorithm.  **Note: This feature requires enabling the knowledgebase enhancements feature preview flag.**
+    pub fn new() -> ApiChunkingOptions {
+        ApiChunkingOptions {
+            child_chunk_size: None,
+            max_chunk_size: None,
+            parent_chunk_size: None,
+            semantic_threshold: None,
         }
     }
 }

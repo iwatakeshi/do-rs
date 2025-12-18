@@ -7,6 +7,8 @@ Name | Type | Description | Notes
 **aws_data_source** | Option<[**models::ApiAwsDataSource**](apiAWSDataSource.md)> |  | [optional]
 **bucket_name** | Option<**String**> | Deprecated, moved to data_source_details | [optional]
 **bucket_region** | Option<**String**> | Deprecated, moved to data_source_details | [optional]
+**chunking_algorithm** | Option<[**models::ApiChunkingAlgorithm**](apiChunkingAlgorithm.md)> |  | [optional]
+**chunking_options** | Option<[**models::ApiChunkingOptions**](apiChunkingOptions.md)> |  | [optional]
 **dropbox_data_source** | Option<[**models::ApiDropboxDataSource**](apiDropboxDataSource.md)> |  | [optional]
 **file_upload_data_source** | Option<[**models::ApiFileUploadDataSource**](apiFileUploadDataSource.md)> |  | [optional]
 **google_drive_data_source** | Option<[**models::ApiGoogleDriveDataSource**](apiGoogleDriveDataSource.md)> |  | [optional]

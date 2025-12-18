@@ -14,6 +14,8 @@ use serde::{Deserialize, Serialize};
 /// ApiCreateEvaluationDatasetInputPublic : Creates an evaluation dataset for an agent
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct ApiCreateEvaluationDatasetInputPublic {
+    #[serde(rename = "dataset_type", skip_serializing_if = "Option::is_none")]
+    pub dataset_type: Option<models::ApiEvaluationDatasetType>,
     #[serde(
         rename = "file_upload_dataset",
         skip_serializing_if = "Option::is_none"
@@ -28,6 +30,7 @@ impl ApiCreateEvaluationDatasetInputPublic {
     /// Creates an evaluation dataset for an agent
     pub fn new() -> ApiCreateEvaluationDatasetInputPublic {
         ApiCreateEvaluationDatasetInputPublic {
+            dataset_type: None,
             file_upload_dataset: None,
             name: None,
         }

@@ -37,6 +37,18 @@ pub enum BillingHistoryListError {
     UnknownValue(serde_json::Value),
 }
 
+/// struct for typed errors of method [`billing_insights_list`]
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum BillingInsightsListError {
+    Status401(models::Error),
+    Status404(models::Error),
+    Status429(models::Error),
+    Status500(models::Error),
+    DefaultResponse(models::Error),
+    UnknownValue(serde_json::Value),
+}
+
 /// struct for typed errors of method [`invoices_get_by_uuid`]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
@@ -177,6 +189,73 @@ pub async fn billing_history_list(
     } else {
         let content = resp.text().await?;
         let entity: Option<BillingHistoryListError> = serde_json::from_str(&content).ok();
+        Err(Error::ResponseError(ResponseContent {
+            status,
+            content,
+            entity,
+        }))
+    }
+}
+
+///  This endpoint returns day-over-day changes in billing resource usage based on nightly invoice items, including total amount, region, SKU, and description for a specified date range. It is important to note that the daily resource usage may not reflect month-end billing totals when totaled for a given month as nightly invoice item estimates do not necessarily encompass all invoicing factors for the entire month.
+pub async fn billing_insights_list(
+    configuration: &configuration::Configuration,
+    account_urn: &str,
+    start_date: String,
+    end_date: String,
+    per_page: Option<i32>,
+    page: Option<i32>,
+) -> Result<models::BillingInsightsList200Response, Error<BillingInsightsListError>> {
+    // add a prefix to parameters to efficiently prevent name collisions
+    let p_path_account_urn = account_urn;
+    let p_path_start_date = start_date;
+    let p_path_end_date = end_date;
+    let p_query_per_page = per_page;
+    let p_query_page = page;
+
+    let uri_str = format!(
+        "{}/v2/billing/{account_urn}/insights/{start_date}/{end_date}",
+        configuration.base_path,
+        account_urn = crate::apis::urlencode(p_path_account_urn),
+        start_date = p_path_start_date,
+        end_date = p_path_end_date
+    );
+    let mut req_builder = configuration.client.request(reqwest::Method::GET, &uri_str);
+
+    if let Some(ref param_value) = p_query_per_page {
+        req_builder = req_builder.query(&[("per_page", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_query_page {
+        req_builder = req_builder.query(&[("page", &param_value.to_string())]);
+    }
+    if let Some(ref user_agent) = configuration.user_agent {
+        req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());
+    }
+    if let Some(ref token) = configuration.bearer_access_token {
+        req_builder = req_builder.bearer_auth(token.to_owned());
+    };
+
+    let req = req_builder.build()?;
+    let resp = configuration.client.execute(req).await?;
+
+    let status = resp.status();
+    let content_type = resp
+        .headers()
+        .get("content-type")
+        .and_then(|v| v.to_str().ok())
+        .unwrap_or("application/octet-stream");
+    let content_type = super::ContentType::from(content_type);
+
+    if !status.is_client_error() && !status.is_server_error() {
+        let content = resp.text().await?;
+        match content_type {
+            ContentType::Json => serde_json::from_str(&content).map_err(Error::from),
+            ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `models::BillingInsightsList200Response`"))),
+            ContentType::Unsupported(unknown_type) => return Err(Error::from(serde_json::Error::custom(format!("Received `{unknown_type}` content type response that cannot be converted to `models::BillingInsightsList200Response`")))),
+        }
+    } else {
+        let content = resp.text().await?;
+        let entity: Option<BillingInsightsListError> = serde_json::from_str(&content).ok();
         Err(Error::ResponseError(ResponseContent {
             status,
             content,

@@ -6,6 +6,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **aws_data_source** | Option<[**models::ApiAwsDataSourceDisplay**](apiAWSDataSourceDisplay.md)> |  | [optional]
 **bucket_name** | Option<**String**> | Name of storage bucket - Deprecated, moved to data_source_details | [optional]
+**chunking_algorithm** | Option<[**models::ApiChunkingAlgorithm**](apiChunkingAlgorithm.md)> |  | [optional]
+**chunking_options** | Option<[**models::ApiChunkingOptions**](apiChunkingOptions.md)> |  | [optional]
 **created_at** | Option<**String**> | Creation date / time | [optional]
 **dropbox_data_source** | Option<[**models::ApiDropboxDataSourceDisplay**](apiDropboxDataSourceDisplay.md)> |  | [optional]
 **file_upload_data_source** | Option<[**models::ApiFileUploadDataSource**](apiFileUploadDataSource.md)> |  | [optional]
