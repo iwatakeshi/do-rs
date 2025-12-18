@@ -22,6 +22,7 @@ Patches are applied in numerical order:
 - **004-action-link-id-i64.patch**: Changes `ActionLink.id` from `i32` to `i64` to handle action IDs that exceed `i32::MAX`.
 - **005-image-regions-string.patch**: Changes `Image.regions` from `Vec<RegionSlug>` to `Vec<String>` for forward compatibility with new regions like `atl1` not yet in the enum.
 - **006-pagination-module.patch**: Adds `pub mod pagination;` export to `lib.rs` for the pagination helper module.
+- **007-image-type-application.patch**: Adds the `Application` variant to `Image::Type` enum. The DigitalOcean API returns `"type": "application"` for Docker and other marketplace images, but this variant was missing from the generated enum, causing `DropletsCreate202Response` deserialization failures.
 - **droplet_with_ssh_keys.rs**: Example file demonstrating SSH keys usage (copied to `examples/`)
 
 ### File Replacements

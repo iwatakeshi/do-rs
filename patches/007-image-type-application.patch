@@ -1,0 +1,11 @@
+--- a/src/models/image.rs
++++ b/src/models/image.rs
+@@ -99,6 +99,8 @@ pub struct Image {
+ /// Describes the kind of image. It may be one of `base`, `snapshot`, `backup`, `custom`, or `admin`. Respectively, this specifies whether an image is a DigitalOcean base OS image, user-generated Droplet snapshot, automatically created Droplet backup, user-provided virtual machine image, or an image used for DigitalOcean managed resources (e.g. DOKS worker nodes).
+ #[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
+ pub enum Type {
++    #[serde(rename = "application")]
++    Application,
+     #[serde(rename = "base")]
+     Base,
+     #[serde(rename = "snapshot")]
